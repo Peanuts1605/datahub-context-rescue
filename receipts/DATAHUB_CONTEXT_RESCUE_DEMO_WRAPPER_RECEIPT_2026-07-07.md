@@ -55,6 +55,14 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 - Duration: 10.04 seconds
 - Status: raw interaction capture only; final narrated 90-120 second submission video still needed.
 
+## Captioned Demo Video
+
+- Script: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/scripts/capture_captioned_demo.mjs`
+- WebM: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-captioned.webm`
+- MP4: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-captioned.mp4`
+- Duration: 71.16 seconds
+- Status: local captioned submission cut candidate; still needs public YouTube/Vimeo upload for Devpost.
+
 ## Backup
 
 - Local bundle: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/datahub-context-rescue-demo-wrapper-2026-07-07.zip`
@@ -74,6 +82,7 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 - Playwright mobile screenshot: passed
 - Playwright click replay screenshot: passed
 - Playwright raw video capture: passed
+- Playwright captioned demo capture: passed
 
 ## Visual QA
 
