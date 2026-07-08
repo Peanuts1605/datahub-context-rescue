@@ -70,6 +70,7 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 - Drive bundle: https://drive.google.com/file/d/1vyI-H3PN7Vh44W-xNnjRqklaotDTrb4N/view?usp=drivesdk
 - Submission candidate bundle: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/datahub-context-rescue-submission-candidate-2026-07-07.zip`
 - Submission candidate Drive bundle: https://drive.google.com/file/d/1rWAb76dvYHb5GYHduUeimKsZqUAa6Y6s/view?usp=drivesdk
+- Submission candidate receipt mirror: https://drive.google.com/file/d/1-vZvbAoBSNDO8dWiv3_RHTEYkMZJYMbz/view?usp=drivesdk
 - Notion pointer: https://app.notion.com/p/397b143d29178152bcf3db4da989e76c
 
 ## Verification
