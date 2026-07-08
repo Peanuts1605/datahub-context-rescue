@@ -108,23 +108,14 @@ The important part is trust. The system shows exactly what evidence it used, and
 
 ## GitHub Publish Status
 
-Local repo is initialized and committed.
+Public repo is live:
+
+- https://github.com/Peanuts1605/datahub-context-rescue
+
+GitHub detects the repository license as Apache License 2.0.
 
 Captioned demo video is recorded locally and mirrored to Drive:
 
 - https://drive.google.com/file/d/1iQ2w2aIkmjaNcFSCgKA8L8w18jSlUdfG/view?usp=drivesdk
 
-Current blocker: GitHub CLI is not authenticated on this machine.
-
-Command attempted:
-
-```bash
-GH_PROMPT_DISABLED=1 gh repo create datahub-context-rescue --public --source . --remote origin --push
-```
-
-Result:
-
-```text
-To get started with GitHub CLI, please run: gh auth login
-Alternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.
-```
+Remaining publish step: upload the demo video to a public YouTube, Vimeo, or Youku link for Devpost.
