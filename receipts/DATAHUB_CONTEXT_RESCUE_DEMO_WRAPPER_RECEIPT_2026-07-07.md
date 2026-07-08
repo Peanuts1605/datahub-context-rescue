@@ -51,6 +51,7 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 
 - WebM: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-wrapper-demo.webm`
 - MP4: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-wrapper-demo.mp4`
+- Drive MP4: https://drive.google.com/file/d/19RkupaSp6tpHHrivtWIqWH6D1Z0kv7T7/view?usp=drivesdk
 - Duration: 10.04 seconds
 - Status: raw interaction capture only; final narrated 90-120 second submission video still needed.
 
