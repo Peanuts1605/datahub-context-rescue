@@ -92,3 +92,26 @@ Prepare the public repo/submission package:
 2. Push this project with Apache 2.0 license visible.
 3. Record a 90-120 second demo video using the local wrapper and CR-0001 card.
 4. Draft the Devpost submission text with the current README and sample output links.
+
+## GitHub Publish Attempt
+
+Local repo initialized and committed.
+
+Current blocker: GitHub CLI is not authenticated on this machine.
+
+Attempted command:
+
+```bash
+GH_PROMPT_DISABLED=1 gh repo create datahub-context-rescue --public --source . --remote origin --push
+```
+
+Result:
+
+```text
+To get started with GitHub CLI, please run: gh auth login
+Alternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.
+```
+
+Submission draft created:
+
+- `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/docs/DEVPOST_SUBMISSION_DRAFT_2026-07-07.md`
