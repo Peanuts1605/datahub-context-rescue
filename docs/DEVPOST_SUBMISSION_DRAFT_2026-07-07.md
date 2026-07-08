@@ -70,6 +70,8 @@ DataHub context retrieved:
 
 - `examples/sample_lineage_rescue_card_CR-0001.md`
 - `examples/sample_lineage_rescue_input.md`
+- `demo/video/context-rescue-cr0001-captioned.mp4`
+- `receipts/DATAHUB_CONTEXT_RESCUE_DEMO_WRAPPER_RECEIPT_2026-07-07.md`
 
 ## Testing Instructions
 
@@ -101,12 +103,16 @@ The important part is trust. The system shows exactly what evidence it used, and
 ## What Is Next
 
 - Push the repo publicly with Apache 2.0 license visible.
-- Record the 90-120 second video.
-- Optionally add verified DataHub document writeback once MCP mutation tools are enabled and tested.
+- Upload the 71.16 second captioned demo video to a public YouTube, Vimeo, or Youku link.
+- Optionally add verified DataHub document writeback later once MCP mutation tools are enabled and tested.
 
 ## GitHub Publish Status
 
 Local repo is initialized and committed.
+
+Captioned demo video is recorded locally and mirrored to Drive:
+
+- https://drive.google.com/file/d/1iQ2w2aIkmjaNcFSCgKA8L8w18jSlUdfG/view?usp=drivesdk
 
 Current blocker: GitHub CLI is not authenticated on this machine.
 
@@ -122,4 +128,3 @@ Result:
 To get started with GitHub CLI, please run: gh auth login
 Alternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.
 ```
-

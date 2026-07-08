@@ -8,7 +8,7 @@ Task: Build and verify the smallest local demo wrapper around CR-0001.
 
 ## Decision
 
-PROCEED_TO_REPO_AND_VIDEO_PREP
+SUBMISSION_CANDIDATE_READY_WITH_GITHUB_AUTH_BLOCKER
 
 ## What Was Built
 
@@ -60,13 +60,16 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 - Script: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/scripts/capture_captioned_demo.mjs`
 - WebM: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-captioned.webm`
 - MP4: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-captioned.mp4`
+- Drive MP4: https://drive.google.com/file/d/1iQ2w2aIkmjaNcFSCgKA8L8w18jSlUdfG/view?usp=drivesdk
 - Duration: 71.16 seconds
-- Status: local captioned submission cut candidate; still needs public YouTube/Vimeo upload for Devpost.
+- Status: captioned submission cut candidate; still needs public YouTube/Vimeo upload for Devpost.
 
 ## Backup
 
 - Local bundle: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/datahub-context-rescue-demo-wrapper-2026-07-07.zip`
 - Drive bundle: https://drive.google.com/file/d/1vyI-H3PN7Vh44W-xNnjRqklaotDTrb4N/view?usp=drivesdk
+- Submission candidate bundle: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/datahub-context-rescue-submission-candidate-2026-07-07.zip`
+- Submission candidate Drive bundle: https://drive.google.com/file/d/1rWAb76dvYHb5GYHduUeimKsZqUAa6Y6s/view?usp=drivesdk
 - Notion pointer: https://app.notion.com/p/397b143d29178152bcf3db4da989e76c
 
 ## Verification
@@ -100,16 +103,18 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 
 ## Blocker
 
-None for the demo wrapper.
+None for the local demo wrapper.
+
+External submission blocker: GitHub CLI is not authenticated on this machine, so the public Apache 2.0 repo has not been pushed yet.
 
 ## Next Smallest Patch
 
-Prepare the public repo/submission package:
+Finish the public Devpost package:
 
 1. Create or choose the GitHub repo.
 2. Push this project with Apache 2.0 license visible.
-3. Record a 90-120 second demo video using the local wrapper and CR-0001 card.
-4. Draft the Devpost submission text with the current README and sample output links.
+3. Upload the 71.16 second captioned MP4 to a public YouTube/Vimeo/Youku link for Devpost.
+4. Paste the repo URL, public video URL, and draft copy from `docs/DEVPOST_SUBMISSION_DRAFT_2026-07-07.md` into Devpost.
 
 ## GitHub Publish Attempt
 

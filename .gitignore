@@ -3,6 +3,7 @@ node_modules/
 app/node_modules/
 app/dist/
 demo/video/playwright-raw/
+demo/video/captioned-raw/
 __pycache__/
 *.pyc
 *.log

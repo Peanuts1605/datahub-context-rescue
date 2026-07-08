@@ -40,6 +40,13 @@ npm run dev
 
 Then open the local URL printed by Vite.
 
+Demo evidence:
+
+- Captioned demo video: `demo/video/context-rescue-cr0001-captioned.mp4`
+- Desktop success screenshot: `demo/screenshots/context-rescue-wrapper-desktop-complete.png`
+- Mobile screenshot: `demo/screenshots/context-rescue-wrapper-mobile-fullpage.png`
+- Demo wrapper receipt: `receipts/DATAHUB_CONTEXT_RESCUE_DEMO_WRAPPER_RECEIPT_2026-07-07.md`
+
 ## Refresh Proof Data
 
 If the MCP evidence files change, regenerate the app data:
@@ -75,4 +82,3 @@ The MCP server was run locally with DataHub connection values stored outside the
 - Data: public-safe DataHub sample data only
 - Writeback status: local receipt created; live DataHub document writeback is parked until mutation/write tools are explicitly enabled and verified
 - License: Apache 2.0
-
