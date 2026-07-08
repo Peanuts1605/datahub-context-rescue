@@ -106,14 +106,14 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 
 None for the local demo wrapper.
 
-External submission blocker: GitHub CLI is not authenticated on this machine, so the public Apache 2.0 repo has not been pushed yet.
+External submission blocker: GitHub CLI is not authenticated on this machine, GitHub SSH returns `Permission denied (publickey)`, no `GH_TOKEN` / `GITHUB_TOKEN` environment variable is present, and the available GitHub connector can only write to an existing repository. The public Apache 2.0 repo has not been pushed yet.
 
 ## Next Smallest Patch
 
 Finish the public Devpost package:
 
-1. Create or choose the GitHub repo.
-2. Push this project with Apache 2.0 license visible.
+1. Authenticate GitHub CLI with `gh auth login` or set a scoped `GH_TOKEN`.
+2. Run `gh repo create datahub-context-rescue --public --source . --remote origin --push`.
 3. Upload the 71.16 second captioned MP4 to a public YouTube/Vimeo/Youku link for Devpost.
 4. Paste the repo URL, public video URL, and draft copy from `docs/DEVPOST_SUBMISSION_DRAFT_2026-07-07.md` into Devpost.
 
