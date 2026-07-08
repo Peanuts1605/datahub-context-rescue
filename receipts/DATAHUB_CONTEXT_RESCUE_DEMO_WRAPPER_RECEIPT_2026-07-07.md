@@ -47,6 +47,13 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 - `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/screenshots/context-rescue-wrapper-mobile-ready.png`
 - `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/screenshots/context-rescue-wrapper-mobile-fullpage.png`
 
+## Raw Demo Video
+
+- WebM: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-wrapper-demo.webm`
+- MP4: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/video/context-rescue-cr0001-wrapper-demo.mp4`
+- Duration: 10.04 seconds
+- Status: raw interaction capture only; final narrated 90-120 second submission video still needed.
+
 ## Backup
 
 - Local bundle: `/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/datahub-context-rescue-demo-wrapper-2026-07-07.zip`
@@ -65,6 +72,7 @@ The wrapper runs in replay mode from verified local MCP evidence. It does not cl
 - Playwright desktop screenshot: passed
 - Playwright mobile screenshot: passed
 - Playwright click replay screenshot: passed
+- Playwright raw video capture: passed
 
 ## Visual QA
 
