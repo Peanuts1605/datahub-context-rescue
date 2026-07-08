@@ -1,0 +1,24 @@
+{
+  "arguments": {
+    "count": 10,
+    "start": 0,
+    "urn": "urn:li:dataset:(urn:li:dataPlatform:powerbi,b2fd91.datahub_order_entries.Essential_KPI_Measures,PROD)"
+  },
+  "result": {
+    "content": [
+      {
+        "annotations": null,
+        "meta": null,
+        "parsed_json": {
+          "count": 10,
+          "start": 0,
+          "total": 0
+        },
+        "text": "{\"start\":0,\"total\":0,\"count\":10}",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  },
+  "tool": "get_dataset_queries"
+}

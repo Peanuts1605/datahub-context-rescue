@@ -1,0 +1,136 @@
+{
+  "arguments": {
+    "context_chars": 260,
+    "max_matches_per_doc": 5,
+    "pattern": "(?i)revenue|order_total|Total Revenue|order count|promotion",
+    "start_offset": 0,
+    "urns": [
+      "urn:li:document:ecomm-metrics",
+      "urn:li:document:ecomm-order-details",
+      "urn:li:document:ecomm-runbook-promotions",
+      "urn:li:document:ecomm-runbook-order-count"
+    ]
+  },
+  "result": {
+    "content": [
+      {
+        "annotations": null,
+        "meta": null,
+        "parsed_json": {
+          "documents_with_matches": 4,
+          "results": [
+            {
+              "matches": [
+                {
+                  "excerpt": "# Key Metrics Reference\n\nBusiness KPI definitions for the Order Entry e-commerce platform.\nUse these definitions to ensure consistent metric calculations across\nall dashboards, reports, and AI-generated analyses.\n\n## Revenue Metrics\n\n### GMV (Gross Merchandise Value)\n**Definition:** Total order value at the point of sale, before returns or\ncancellations. The headline revenue number.\n\n**Calculation:**\n```sql\nSUM(order_total) FROM orders\nWHERE order_status NOT IN ('Cancelled', 'On ...",
+                  "position": 217
+                },
+                {
+                  "excerpt": "...ns to ensure consistent metric calculations across\nall dashboards, reports, and AI-generated analyses.\n\n## Revenue Metrics\n\n### GMV (Gross Merchandise Value)\n**Definition:** Total order value at the point of sale, before returns or\ncancellations. The headline revenue number.\n\n**Calculation:**\n```sql\nSUM(order_total) FROM orders\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\n```\n\n**Source table:** `orders.order_total`\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\nitem value from `order_items` ...",
+                  "position": 370
+                },
+                {
+                  "excerpt": "...cross\nall dashboards, reports, and AI-generated analyses.\n\n## Revenue Metrics\n\n### GMV (Gross Merchandise Value)\n**Definition:** Total order value at the point of sale, before returns or\ncancellations. The headline revenue number.\n\n**Calculation:**\n```sql\nSUM(order_total) FROM orders\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\n```\n\n**Source table:** `orders.order_total`\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\nitem value from `order_items` where `return_date IS NOT NULL`.\n\n---\n\n### Net Re...",
+                  "position": 415
+                },
+                {
+                  "excerpt": "...alue)\n**Definition:** Total order value at the point of sale, before returns or\ncancellations. The headline revenue number.\n\n**Calculation:**\n```sql\nSUM(order_total) FROM orders\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\n```\n\n**Source table:** `orders.order_total`\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\nitem value from `order_items` where `return_date IS NOT NULL`.\n\n---\n\n### Net Revenue\n**Definition:** GMV minus the value of returned items.\n\n**Calculation:**\n```sql\nSUM(CASE WHEN oi.retu...",
+                  "position": 522
+                },
+                {
+                  "excerpt": "...le, before returns or\ncancellations. The headline revenue number.\n\n**Calculation:**\n```sql\nSUM(order_total) FROM orders\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\n```\n\n**Source table:** `orders.order_total`\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\nitem value from `order_items` where `return_date IS NOT NULL`.\n\n---\n\n### Net Revenue\n**Definition:** GMV minus the value of returned items.\n\n**Calculation:**\n```sql\nSUM(CASE WHEN oi.return_date IS NULL\n         THEN oi.unit_price * oi.quant...",
+                  "position": 580
+                }
+              ],
+              "title": "Key Metrics Reference",
+              "total_matches": 13,
+              "urn": "urn:li:document:ecomm-metrics"
+            },
+            {
+              "matches": [
+                {
+                  "excerpt": "...nt pre-computed `line_total` | Need to debug a specific pipeline stage |\n| BI tools (Looker, PowerBI, Tableau) | dbt model development |\n\n## Key Computed Columns\n\n| Column | Computation | Notes |\n|---|---|---|\n| `line_total` | `unit_price \u00d7 quantity` | Actual revenue per line item |\n| `order_size_category` | Bucket of `order_total` | Small / Medium / Large |\n| `stock_status` | Derived from `quantity_on_hand` | In Stock / Low / Out |\n| `delivery_status` | Derived from dates | On Time / Delayed / Pending |\n| `return_status`...",
+                  "position": 1004
+                },
+                {
+                  "excerpt": "...ine stage |\n| BI tools (Looker, PowerBI, Tableau) | dbt model development |\n\n## Key Computed Columns\n\n| Column | Computation | Notes |\n|---|---|---|\n| `line_total` | `unit_price \u00d7 quantity` | Actual revenue per line item |\n| `order_size_category` | Bucket of `order_total` | Small / Medium / Large |\n| `stock_status` | Derived from `quantity_on_hand` | In Stock / Low / Out |\n| `delivery_status` | Derived from dates | On Time / Delayed / Pending |\n| `return_status` | From `return_date` | Returned / Not Returned |\n\n## Gotchas\n\n- ...",
+                  "position": 1065
+                },
+                {
+                  "excerpt": "...on_hand` | In Stock / Low / Out |\n| `delivery_status` | Derived from dates | On Time / Delayed / Pending |\n| `return_status` | From `return_date` | Returned / Not Returned |\n\n## Gotchas\n\n- **Grain is order-item, not order.** Use `COUNT(DISTINCT order_id)` for order counts,\n  not `COUNT(*)`.\n- **`order_details_replica`** is an exact copy used for query load balancing.\n  They have identical schemas and are kept in sync. Use `order_details` by default;\n  use the replica only if explicitly directed by the data platform team.\n\n## ...",
+                  "position": 1407
+                },
+                {
+                  "excerpt": "...rder_details_replica`** is an exact copy used for query load balancing.\n  They have identical schemas and are kept in sync. Use `order_details` by default;\n  use the replica only if explicitly directed by the data platform team.\n\n## Quick Reference Queries\n\n**Revenue by product category:**\n```sql\nSELECT   category_name,\n         SUM(line_total)   AS revenue,\n         COUNT(DISTINCT order_id) AS orders\nFROM     order_entry_db.analytics.order_details\nWHERE    order_status NOT IN ('Cancelled', 'On Hold')\nGROUP BY 1\nORDER BY ...",
+                  "position": 1705
+                },
+                {
+                  "excerpt": "...l schemas and are kept in sync. Use `order_details` by default;\n  use the replica only if explicitly directed by the data platform team.\n\n## Quick Reference Queries\n\n**Revenue by product category:**\n```sql\nSELECT   category_name,\n         SUM(line_total)   AS revenue,\n         COUNT(DISTINCT order_id) AS orders\nFROM     order_entry_db.analytics.order_details\nWHERE    order_status NOT IN ('Cancelled', 'On Hold')\nGROUP BY 1\nORDER BY 2 DESC;\n```\n\n**Average Order Value by customer class:**\n```sql\nSELECT   customer_class,\n    ...",
+                  "position": 1797
+                }
+              ],
+              "title": "Order Details View",
+              "total_matches": 6,
+              "urn": "urn:li:document:ecomm-order-details"
+            },
+            {
+              "matches": [
+                {
+                  "excerpt": "# Runbook: Promotion Attribution Issues\n\n**Applies to:** `promotions` table, `orders.promotion_id`\n**Severity:** Medium (affects marketing ROI reporting)\n\n## Symptoms\n\n- Promotion metrics show 0 orders when orders clearly used a discount\n- A promotion appears to have too many or ...",
+                  "position": 11
+                },
+                {
+                  "excerpt": "# Runbook: Promotion Attribution Issues\n\n**Applies to:** `promotions` table, `orders.promotion_id`\n**Severity:** Medium (affects marketing ROI reporting)\n\n## Symptoms\n\n- Promotion metrics show 0 orders when orders clearly used a discount\n- A promotion appears to have too many or too few attributed orders\n- Revenue lift calcul...",
+                  "position": 58
+                },
+                {
+                  "excerpt": "# Runbook: Promotion Attribution Issues\n\n**Applies to:** `promotions` table, `orders.promotion_id`\n**Severity:** Medium (affects marketing ROI reporting)\n\n## Symptoms\n\n- Promotion metrics show 0 orders when orders clearly used a discount\n- A promotion appears to have too many or too few attributed orders\n- Revenue lift calculations look implausible\n\n##...",
+                  "position": 85
+                },
+                {
+                  "excerpt": "# Runbook: Promotion Attribution Issues\n\n**Applies to:** `promotions` table, `orders.promotion_id`\n**Severity:** Medium (affects marketing ROI reporting)\n\n## Symptoms\n\n- Promotion metrics show 0 orders when orders clearly used a discount\n- A promotion appears to have too many or too few attributed orders\n- Revenue lift calculations look implausible\n\n## Step 1 \u2014 Verify the join type\n\nThe most common cause: reports use INNER JOIN on prom...",
+                  "position": 170
+                },
+                {
+                  "excerpt": "# Runbook: Promotion Attribution Issues\n\n**Applies to:** `promotions` table, `orders.promotion_id`\n**Severity:** Medium (affects marketing ROI reporting)\n\n## Symptoms\n\n- Promotion metrics show 0 orders when orders clearly used a discount\n- A promotion appears to have too many or too few attributed orders\n- Revenue lift calculations look implausible\n\n## Step 1 \u2014 Verify the join type\n\nThe most common cause: reports use INNER JOIN on promotions, which drops\nthe ~65% of orders with `promotion_id IS NULL`.\n\n```...",
+                  "position": 242
+                }
+              ],
+              "title": "Runbook: Promotion Attribution Issues",
+              "total_matches": 32,
+              "urn": "urn:li:document:ecomm-runbook-promotions"
+            },
+            {
+              "matches": [
+                {
+                  "excerpt": "# Runbook: Order Count Discrepancy\n\n**Applies to:** `orders` table, all platforms\n**Severity:** High (affects revenue reporting)\n\n## Symptoms\n\n- Dashboard shows different order counts than expected\n- Order counts in Snowflake differ from PostgreSQL source\n- A specific date range ha...",
+                  "position": 11
+                },
+                {
+                  "excerpt": "# Runbook: Order Count Discrepancy\n\n**Applies to:** `orders` table, all platforms\n**Severity:** High (affects revenue reporting)\n\n## Symptoms\n\n- Dashboard shows different order counts than expected\n- Order counts in Snowflake differ from PostgreSQL source\n- A specific date range has fewer orders than prior periods\n\n## Step 1 \u2014 Check Snowflake freshness\n\n```sql\nSELECT MAX(ord...",
+                  "position": 110
+                },
+                {
+                  "excerpt": "# Runbook: Order Count Discrepancy\n\n**Applies to:** `orders` table, all platforms\n**Severity:** High (affects revenue reporting)\n\n## Symptoms\n\n- Dashboard shows different order counts than expected\n- Order counts in Snowflake differ from PostgreSQL source\n- A specific date range has fewer orders than prior periods\n\n## Step 1 \u2014 Check Snowflake freshness\n\n```sql\nSELECT MAX(order_date) AS latest_order_date,\n       COUNT(*)        AS total_or...",
+                  "position": 171
+                },
+                {
+                  "excerpt": "# Runbook: Order Count Discrepancy\n\n**Applies to:** `orders` table, all platforms\n**Severity:** High (affects revenue reporting)\n\n## Symptoms\n\n- Dashboard shows different order counts than expected\n- Order counts in Snowflake differ from PostgreSQL source\n- A specific date range has fewer orders than prior periods\n\n## Step 1 \u2014 Check Snowflake freshness\n\n```sql\nSELECT MAX(order_date) AS latest_order_date,\n       COUNT(*)        AS total_orders\nFROM   order_entry_db.or...",
+                  "position": 200
+                }
+              ],
+              "title": "Runbook: Order Count Discrepancy",
+              "total_matches": 4,
+              "urn": "urn:li:document:ecomm-runbook-order-count"
+            }
+          ],
+          "total_matches": 55
+        },
+        "text": "{\"results\":[{\"urn\":\"urn:li:document:ecomm-metrics\",\"title\":\"Key Metrics Reference\",\"matches\":[{\"excerpt\":\"# Key Metrics Reference\\n\\nBusiness KPI definitions for the Order Entry e-commerce platform.\\nUse these definitions to ensure consistent metric calculations across\\nall dashboards, reports, and AI-generated analyses.\\n\\n## Revenue Metrics\\n\\n### GMV (Gross Merchandise Value)\\n**Definition:** Total order value at the point of sale, before returns or\\ncancellations. The headline revenue number.\\n\\n**Calculation:**\\n```sql\\nSUM(order_total) FROM orders\\nWHERE order_status NOT IN ('Cancelled', 'On ...\",\"position\":217},{\"excerpt\":\"...ns to ensure consistent metric calculations across\\nall dashboards, reports, and AI-generated analyses.\\n\\n## Revenue Metrics\\n\\n### GMV (Gross Merchandise Value)\\n**Definition:** Total order value at the point of sale, before returns or\\ncancellations. The headline revenue number.\\n\\n**Calculation:**\\n```sql\\nSUM(order_total) FROM orders\\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\\n```\\n\\n**Source table:** `orders.order_total`\\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\\nitem value from `order_items` ...\",\"position\":370},{\"excerpt\":\"...cross\\nall dashboards, reports, and AI-generated analyses.\\n\\n## Revenue Metrics\\n\\n### GMV (Gross Merchandise Value)\\n**Definition:** Total order value at the point of sale, before returns or\\ncancellations. The headline revenue number.\\n\\n**Calculation:**\\n```sql\\nSUM(order_total) FROM orders\\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\\n```\\n\\n**Source table:** `orders.order_total`\\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\\nitem value from `order_items` where `return_date IS NOT NULL`.\\n\\n---\\n\\n### Net Re...\",\"position\":415},{\"excerpt\":\"...alue)\\n**Definition:** Total order value at the point of sale, before returns or\\ncancellations. The headline revenue number.\\n\\n**Calculation:**\\n```sql\\nSUM(order_total) FROM orders\\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\\n```\\n\\n**Source table:** `orders.order_total`\\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\\nitem value from `order_items` where `return_date IS NOT NULL`.\\n\\n---\\n\\n### Net Revenue\\n**Definition:** GMV minus the value of returned items.\\n\\n**Calculation:**\\n```sql\\nSUM(CASE WHEN oi.retu...\",\"position\":522},{\"excerpt\":\"...le, before returns or\\ncancellations. The headline revenue number.\\n\\n**Calculation:**\\n```sql\\nSUM(order_total) FROM orders\\nWHERE order_status NOT IN ('Cancelled', 'On Hold')\\n```\\n\\n**Source table:** `orders.order_total`\\n**Note:** Does *not* deduct returns. For net revenue, subtract returned\\nitem value from `order_items` where `return_date IS NOT NULL`.\\n\\n---\\n\\n### Net Revenue\\n**Definition:** GMV minus the value of returned items.\\n\\n**Calculation:**\\n```sql\\nSUM(CASE WHEN oi.return_date IS NULL\\n         THEN oi.unit_price * oi.quant...\",\"position\":580}],\"total_matches\":13},{\"urn\":\"urn:li:document:ecomm-order-details\",\"title\":\"Order Details View\",\"matches\":[{\"excerpt\":\"...nt pre-computed `line_total` | Need to debug a specific pipeline stage |\\n| BI tools (Looker, PowerBI, Tableau) | dbt model development |\\n\\n## Key Computed Columns\\n\\n| Column | Computation | Notes |\\n|---|---|---|\\n| `line_total` | `unit_price \u00d7 quantity` | Actual revenue per line item |\\n| `order_size_category` | Bucket of `order_total` | Small / Medium / Large |\\n| `stock_status` | Derived from `quantity_on_hand` | In Stock / Low / Out |\\n| `delivery_status` | Derived from dates | On Time / Delayed / Pending |\\n| `return_status`...\",\"position\":1004},{\"excerpt\":\"...ine stage |\\n| BI tools (Looker, PowerBI, Tableau) | dbt model development |\\n\\n## Key Computed Columns\\n\\n| Column | Computation | Notes |\\n|---|---|---|\\n| `line_total` | `unit_price \u00d7 quantity` | Actual revenue per line item |\\n| `order_size_category` | Bucket of `order_total` | Small / Medium / Large |\\n| `stock_status` | Derived from `quantity_on_hand` | In Stock / Low / Out |\\n| `delivery_status` | Derived from dates | On Time / Delayed / Pending |\\n| `return_status` | From `return_date` | Returned / Not Returned |\\n\\n## Gotchas\\n\\n- ...\",\"position\":1065},{\"excerpt\":\"...on_hand` | In Stock / Low / Out |\\n| `delivery_status` | Derived from dates | On Time / Delayed / Pending |\\n| `return_status` | From `return_date` | Returned / Not Returned |\\n\\n## Gotchas\\n\\n- **Grain is order-item, not order.** Use `COUNT(DISTINCT order_id)` for order counts,\\n  not `COUNT(*)`.\\n- **`order_details_replica`** is an exact copy used for query load balancing.\\n  They have identical schemas and are kept in sync. Use `order_details` by default;\\n  use the replica only if explicitly directed by the data platform team.\\n\\n## ...\",\"position\":1407},{\"excerpt\":\"...rder_details_replica`** is an exact copy used for query load balancing.\\n  They have identical schemas and are kept in sync. Use `order_details` by default;\\n  use the replica only if explicitly directed by the data platform team.\\n\\n## Quick Reference Queries\\n\\n**Revenue by product category:**\\n```sql\\nSELECT   category_name,\\n         SUM(line_total)   AS revenue,\\n         COUNT(DISTINCT order_id) AS orders\\nFROM     order_entry_db.analytics.order_details\\nWHERE    order_status NOT IN ('Cancelled', 'On Hold')\\nGROUP BY 1\\nORDER BY ...\",\"position\":1705},{\"excerpt\":\"...l schemas and are kept in sync. Use `order_details` by default;\\n  use the replica only if explicitly directed by the data platform team.\\n\\n## Quick Reference Queries\\n\\n**Revenue by product category:**\\n```sql\\nSELECT   category_name,\\n         SUM(line_total)   AS revenue,\\n         COUNT(DISTINCT order_id) AS orders\\nFROM     order_entry_db.analytics.order_details\\nWHERE    order_status NOT IN ('Cancelled', 'On Hold')\\nGROUP BY 1\\nORDER BY 2 DESC;\\n```\\n\\n**Average Order Value by customer class:**\\n```sql\\nSELECT   customer_class,\\n    ...\",\"position\":1797}],\"total_matches\":6},{\"urn\":\"urn:li:document:ecomm-runbook-promotions\",\"title\":\"Runbook: Promotion Attribution Issues\",\"matches\":[{\"excerpt\":\"# Runbook: Promotion Attribution Issues\\n\\n**Applies to:** `promotions` table, `orders.promotion_id`\\n**Severity:** Medium (affects marketing ROI reporting)\\n\\n## Symptoms\\n\\n- Promotion metrics show 0 orders when orders clearly used a discount\\n- A promotion appears to have too many or ...\",\"position\":11},{\"excerpt\":\"# Runbook: Promotion Attribution Issues\\n\\n**Applies to:** `promotions` table, `orders.promotion_id`\\n**Severity:** Medium (affects marketing ROI reporting)\\n\\n## Symptoms\\n\\n- Promotion metrics show 0 orders when orders clearly used a discount\\n- A promotion appears to have too many or too few attributed orders\\n- Revenue lift calcul...\",\"position\":58},{\"excerpt\":\"# Runbook: Promotion Attribution Issues\\n\\n**Applies to:** `promotions` table, `orders.promotion_id`\\n**Severity:** Medium (affects marketing ROI reporting)\\n\\n## Symptoms\\n\\n- Promotion metrics show 0 orders when orders clearly used a discount\\n- A promotion appears to have too many or too few attributed orders\\n- Revenue lift calculations look implausible\\n\\n##...\",\"position\":85},{\"excerpt\":\"# Runbook: Promotion Attribution Issues\\n\\n**Applies to:** `promotions` table, `orders.promotion_id`\\n**Severity:** Medium (affects marketing ROI reporting)\\n\\n## Symptoms\\n\\n- Promotion metrics show 0 orders when orders clearly used a discount\\n- A promotion appears to have too many or too few attributed orders\\n- Revenue lift calculations look implausible\\n\\n## Step 1 \u2014 Verify the join type\\n\\nThe most common cause: reports use INNER JOIN on prom...\",\"position\":170},{\"excerpt\":\"# Runbook: Promotion Attribution Issues\\n\\n**Applies to:** `promotions` table, `orders.promotion_id`\\n**Severity:** Medium (affects marketing ROI reporting)\\n\\n## Symptoms\\n\\n- Promotion metrics show 0 orders when orders clearly used a discount\\n- A promotion appears to have too many or too few attributed orders\\n- Revenue lift calculations look implausible\\n\\n## Step 1 \u2014 Verify the join type\\n\\nThe most common cause: reports use INNER JOIN on promotions, which drops\\nthe ~65% of orders with `promotion_id IS NULL`.\\n\\n```...\",\"position\":242}],\"total_matches\":32},{\"urn\":\"urn:li:document:ecomm-runbook-order-count\",\"title\":\"Runbook: Order Count Discrepancy\",\"matches\":[{\"excerpt\":\"# Runbook: Order Count Discrepancy\\n\\n**Applies to:** `orders` table, all platforms\\n**Severity:** High (affects revenue reporting)\\n\\n## Symptoms\\n\\n- Dashboard shows different order counts than expected\\n- Order counts in Snowflake differ from PostgreSQL source\\n- A specific date range ha...\",\"position\":11},{\"excerpt\":\"# Runbook: Order Count Discrepancy\\n\\n**Applies to:** `orders` table, all platforms\\n**Severity:** High (affects revenue reporting)\\n\\n## Symptoms\\n\\n- Dashboard shows different order counts than expected\\n- Order counts in Snowflake differ from PostgreSQL source\\n- A specific date range has fewer orders than prior periods\\n\\n## Step 1 \u2014 Check Snowflake freshness\\n\\n```sql\\nSELECT MAX(ord...\",\"position\":110},{\"excerpt\":\"# Runbook: Order Count Discrepancy\\n\\n**Applies to:** `orders` table, all platforms\\n**Severity:** High (affects revenue reporting)\\n\\n## Symptoms\\n\\n- Dashboard shows different order counts than expected\\n- Order counts in Snowflake differ from PostgreSQL source\\n- A specific date range has fewer orders than prior periods\\n\\n## Step 1 \u2014 Check Snowflake freshness\\n\\n```sql\\nSELECT MAX(order_date) AS latest_order_date,\\n       COUNT(*)        AS total_or...\",\"position\":171},{\"excerpt\":\"# Runbook: Order Count Discrepancy\\n\\n**Applies to:** `orders` table, all platforms\\n**Severity:** High (affects revenue reporting)\\n\\n## Symptoms\\n\\n- Dashboard shows different order counts than expected\\n- Order counts in Snowflake differ from PostgreSQL source\\n- A specific date range has fewer orders than prior periods\\n\\n## Step 1 \u2014 Check Snowflake freshness\\n\\n```sql\\nSELECT MAX(order_date) AS latest_order_date,\\n       COUNT(*)        AS total_orders\\nFROM   order_entry_db.or...\",\"position\":200}],\"total_matches\":4}],\"total_matches\":55,\"documents_with_matches\":4}",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  },
+  "tool": "grep_documents"
+}

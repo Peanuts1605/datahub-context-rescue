@@ -1,0 +1,155 @@
+/Users/alfredthebot/.cache/uv/archive-v0/J-6kaVRRUus-Or_PvDZrz/lib/python3.14/site-packages/mcp_server_datahub/tools/save_document.py:27: ExperimentalWarning: The new datahub SDK (e.g. datahub.sdk.*) is experimental. Our typical backwards-compatibility and stability guarantees do not apply to this code. When it's promoted to stable, the import path will change from `from datahub.sdk import ...` to `from datahub import ...`.
+  from datahub.sdk import Document
+2026-07-07 20:34:59.544 | INFO     | mcp_server_datahub.view_helpers:<module>:21 - Default view application ENABLED (cache TTL: 5 minutes)
+2026-07-07 20:34:59.545 | INFO     | mcp_server_datahub.mcp_server:register_all_tools:425 - Registering MCP tools (is_oss=True)
+2026-07-07 20:34:59.555 | INFO     | mcp_server_datahub.mcp_server:register_mutation_tools:230 - Mutation Tools DISABLED MCP Server.
+2026-07-07 20:34:59.555 | INFO     | mcp_server_datahub.mcp_server:register_user_tools:288 - User Tools DISABLED MCP Server.
+2026-07-07 20:34:59.555 | INFO     | mcp_server_datahub.mcp_server:register_data_quality_tools:395 - Data Quality Tools DISABLED MCP Server.
+[07/07/26 20:35:00] INFO     Starting MCP server 'datahub' with transport.py:223
+                             transport 'stdio'                                  
+INFO:mcp.server.lowlevel.server:Processing request of type CallToolRequest
+2026-07-07 20:35:00.367 | DEBUG    | mcp_server_datahub.document_tools_middleware:_query_documents_exist_cached:98 - Document check cache miss, querying DataHub
+2026-07-07 20:35:00.367 | DEBUG    | mcp_server_datahub.graphql_helpers:execute_graphql:444 - Executing GraphQL documentSearch: is_cloud=False, newer_gms_enabled=False
+2026-07-07 20:35:00.367 | DEBUG    | mcp_server_datahub.graphql_helpers:execute_graphql:448 - GraphQL query for documentSearch:
+# GraphQL query for searching Document entities (keyword search)
+# Returns document metadata WITHOUT content to avoid context bloat
+
+fragment DocumentSearchInfo on Document {
+  urn
+  subType
+  platform {
+    urn
+    name
+  }
+  info {
+    title
+    source {
+      sourceType
+      externalUrl
+    }
+    lastModified {
+      time
+      actor {
+        urn
+      }
+    }
+    created {
+      time
+      actor {
+        urn
+      }
+    }
+  }
+  domain {
+    domain {
+      urn
+      properties {
+        name
+      }
+    }
+  }
+  tags {
+    tags {
+      tag {
+        urn
+        properties {
+          name
+        }
+      }
+    }
+  }
+  glossaryTerms {
+    terms {
+      term {
+        urn
+        properties {
+          name
+        }
+      }
+    }
+  }
+}
+
+fragment DocumentFacetEntityInfo on Entity {
+  ... on GlossaryTerm {
+    properties {
+      name
+    }
+  }
+  ... on Domain {
+    properties {
+      name
+    }
+  }
+}
+
+query documentSearch(
+  $query: String!
+  $orFilters: [AndFilterInput!]
+  $count: Int!
+  $start: Int!
+  $viewUrn: String
+) {
+  searchAcrossEntities(
+    input: {
+      query: $query
+      count: $count
+      start: $start
+      types: [DOCUMENT]
+      orFilters: $orFilters
+      viewUrn: $viewUrn
+      searchFlags: { skipHighlighting: true, maxAggValues: 10 }
+    }
+  ) {
+    start
+    count
+    total
+    searchResults {
+      entity {
+        ... on Document {
+          ...DocumentSearchInfo
+        }
+      }
+    }
+    facets {
+      field
+      displayName
+      aggregations {
+        value
+        count
+        displayName
+        entity {
+          ...DocumentFacetEntityInfo
+        }
+      }
+    }
+  }
+}
+
+Variables: {'query': '*', 'orFilters': [], 'count': 1, 'start': 0, 'viewUrn': None}
+2026-07-07 20:35:00.400 | DEBUG    | mcp_server_datahub.document_tools_middleware:_query_documents_exist_cached:122 - Document count query returned total=18
+2026-07-07 20:35:00.400 | INFO     | mcp_server_datahub.document_tools_middleware:_query_documents_exist_cached:125 - Document check result: True (cached for 60s)
+2026-07-07 20:35:00.401 | DEBUG    | mcp_server_datahub.document_tools_middleware:filter_document_tools:189 - Documents exist in catalog, returning all tools
+2026-07-07 20:35:00.401 | DEBUG    | mcp_server_datahub.version_requirements:_get_server_version_info:187 - Server version info for http://localhost:8080: is_cloud=False, version=(1, 6, 0, 0) (cached for 60s)
+2026-07-07 20:35:00.404 | DEBUG    | mcp_server_datahub.graphql_helpers:execute_graphql:444 - Executing GraphQL documentContent: is_cloud=False, newer_gms_enabled=False
+2026-07-07 20:35:00.404 | DEBUG    | mcp_server_datahub.graphql_helpers:execute_graphql:448 - GraphQL query for documentContent:
+# GraphQL query for fetching document content by URNs
+# Used by grep_documents to search within document content
+
+query documentContent($urns: [String!]!) {
+  entities(urns: $urns) {
+    urn
+    ... on Document {
+      info {
+        title
+        contents {
+          text
+        }
+      }
+    }
+  }
+}
+
+Variables: {'urns': ['urn:li:document:ecomm-metrics', 'urn:li:document:ecomm-order-details', 'urn:li:document:ecomm-runbook-promotions', 'urn:li:document:ecomm-runbook-order-count']}
+INFO:mcp.server.lowlevel.server:Processing request of type ListToolsRequest
+2026-07-07 20:35:00.697 | DEBUG    | mcp_server_datahub.document_tools_middleware:filter_document_tools:189 - Documents exist in catalog, returning all tools

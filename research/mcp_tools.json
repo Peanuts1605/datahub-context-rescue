@@ -1,0 +1,573 @@
+{
+  "meta": null,
+  "nextCursor": null,
+  "tools": [
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "Search across DataHub entities using structured full-text search.\nResults are ordered by relevance and importance - examine top results first.\n\nSEARCH SYNTAX:\n- Structured full-text search - **always start queries with /q**\n- **Recommended: Use + operator for AND** (handles punctuation better than quotes)\n- Supports full boolean logic: AND (default), OR, NOT, parentheses, field searches\n- Examples:\n  * /q user+transaction -> requires both terms (better for field names with _ or punctuation)\n  * /q point+sale+app -> requires all terms (works with point_of_sale_app_usage)\n  * /q wizard OR pet -> entities containing either term\n  * /q revenue* -> wildcard matching (revenue_2023, revenue_2024, revenue_monthly, etc.)\n  * /q tag:PII -> search by tag name\n  * /q \"exact table name\" -> exact phrase matching (use sparingly)\n  * /q (sales OR revenue) AND quarterly -> complex boolean combinations\n- Fast and precise for exact matching, technical terms, and complex queries\n- Best for: entity names, identifiers, column names, or any search needing boolean logic\n\nPAGINATION:\n- num_results: Number of results to return per page (max: 50)\n- offset: Starting position in results (default: 0)\n- Examples:\n  * First page: offset=0, num_results=10\n  * Second page: offset=10, num_results=10\n  * Third page: offset=20, num_results=10\n\nFACET EXPLORATION - Discover metadata without returning results:\n- Set num_results=0 to get ONLY facets (no search results)\n- Facets show ALL tags, glossaryTerms, platforms, domains used in the catalog\n- Example: search(query=\"*\", filter=\"entity_type = dataset\", num_results=0)\n  -> Returns facets showing all tags/glossaryTerms applied to datasets\n- Use this to discover what metadata exists before doing filtered searches\n\nTYPICAL WORKFLOW:\n1. Facet exploration: search(query=\"*\", filter=\"entity_type = dataset\", num_results=0)\n   -> Examine tags/glossaryTerms facets to see what metadata exists\n2. Filtered search: search(query=\"*\", filter=\"tag = urn:li:tag:pii\", num_results=30)\n   -> Get entities with specific tag using URN from step 1\n3. Get details: Use get_entities() on specific results\n\nFILTER SYNTAX (SQL-like WHERE clause):\n    Uses simple SQL-like syntax with AND, OR, NOT, and parentheses.\n\n    Basic filters:\n      platform = snowflake\n      entity_type = dataset\n      env = PROD\n\n    Multiple values (IN):\n      platform IN (snowflake, bigquery, redshift)\n      entity_type IN (dataset, dashboard)\n\n    Combining filters:\n      platform = snowflake AND env = PROD\n      entity_type = dataset AND platform IN (snowflake, bigquery)\n\n    OR and parentheses:\n      platform = snowflake OR platform = bigquery\n      entity_type = dataset AND (platform = snowflake OR platform = bigquery)\n\n    NOT:\n      NOT env = DEV\n      entity_type = dataset AND NOT platform = looker\n\n    Comparison operators (>, >=, <, <=):\n      columnCount > 10\n      columnCount >= 5\n      columnCount <= 100\n\n    Existence checks (IS NULL / IS NOT NULL):\n      glossary_term IS NOT NULL\n      tag IS NOT NULL\n      owner IS NULL\n\n    Complex:\n      entity_type = dataset AND env = PROD AND (platform = snowflake OR platform = bigquery)\n\n    SUPPORTED FILTER FIELDS:\n    - entity_type: dataset, dashboard, chart, corp_user, corp_group, dataProduct, etc.\n    - entity_subtype (or subtype): Table, View, Model, etc.\n    - platform: snowflake, bigquery, looker, tableau, etc.\n    - domain: full URN required, e.g. urn:li:domain:marketing\n    - container: full URN required, e.g. urn:li:container:abc123\n    - tag: full URN required, e.g. urn:li:tag:PII\n    - glossary_term: full URN required, e.g. urn:li:glossaryTerm:uuid\n    - owner: full URN required, e.g. urn:li:corpuser:alice or urn:li:corpGroup:team\n    - env: PROD, DEV, STAGING (only use if explicitly requested)\n    - status: NOT_SOFT_DELETED, ALL, ONLY_SOFT_DELETED\n    - deprecated: true or false (whether the entity is marked as deprecated)\n    - hasActiveIncidents: true or false (whether the entity has active incidents)\n    - hasFailingAssertions: true or false (whether the entity has failing assertions)\n    - columnCount: number of columns (from dataset profiling)\n\n    IMPORTANT: Domain, container, tag, glossary_term, and owner filters require\n    full URN format (urn:li:...). Search with entity_type = domain first to find\n    valid domain URNs, then use the exact URN from the results.\n\n    STRUCTURED PROPERTY FILTERS:\n    Use structuredProperties.<qualifiedName> as the field name. The qualifiedName\n    is the ID portion of the structured property URN (urn:li:structuredProperty:<qualifiedName>).\n      structuredProperties.io.acryl.privacy.retentionTime = 30\n      structuredProperties.31b94813-7667-4ae8-b93a-a72cc5e0c75b IN (Published, Certified)\n      structuredProperties.my.custom.property IS NOT NULL\n    Values are CASE-SENSITIVE. Some structured properties have fixed allowed values\n    (e.g. \"Published\", \"Certified\"). Use get_entities on the structured property URN\n    to check definition.allowedValues and match the exact casing.\n\n    Values containing special characters (spaces, =, parentheses) must be quoted:\n      tag = \"urn:li:tag:my tag\"\n      customProperties = \"key=value\"\n\nSEARCH STRATEGY EXAMPLES:\n- /q customer+behavior -> finds tables with both terms (works with customer_behavior fields)\n- /q customer OR user -> finds tables with either term\n- /q (financial OR revenue) AND metrics -> complex boolean logic\n\nSORTING - Order results by specific fields:\n- sort_by: Field name to sort by (optional)\n- sort_order: \"desc\" (default) or \"asc\"\n\nAvailable sort fields:\n    - lastOperationTime: Last modified timestamp in source system\n\n    Sorting examples:\n    - Most recently updated:\n      search(query=\"*\", filter=\"entity_type = dataset\", sort_by=\"lastOperationTime\", sort_order=\"desc\", num_results=10)\n\nNote: If sort_by is not provided, search results use default ranking by relevance and\nimportance. When using sort_by, results are strictly ordered by that field.\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "filter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "num_results": {
+            "default": 10,
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "type": "integer"
+          },
+          "query": {
+            "default": "*",
+            "type": "string"
+          },
+          "sort_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "sort_order": {
+            "anyOf": [
+              {
+                "enum": [
+                  "asc",
+                  "desc"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "desc"
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": [
+            "search"
+          ]
+        }
+      },
+      "name": "search",
+      "outputSchema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": null
+    },
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "Get upstream or downstream lineage for any entity, including datasets, schemaFields, dashboards, charts, etc.\n\nSet upstream to True for upstream lineage, False for downstream lineage.\nSet `column: null` to get lineage for entire dataset or for entity type other than dataset.\nSetting max_hops to 3 is equivalent to unlimited hops.\n\nFILTER SYNTAX (SQL-like WHERE clause):\n    Uses simple SQL-like syntax with AND, OR, NOT, and parentheses.\n\n    Basic filters:\n      platform = snowflake\n      entity_type = dataset\n      env = PROD\n\n    Multiple values (IN):\n      platform IN (snowflake, bigquery, redshift)\n      entity_type IN (dataset, dashboard)\n\n    Combining filters:\n      platform = snowflake AND env = PROD\n      entity_type = dataset AND platform IN (snowflake, bigquery)\n\n    OR and parentheses:\n      platform = snowflake OR platform = bigquery\n      entity_type = dataset AND (platform = snowflake OR platform = bigquery)\n\n    NOT:\n      NOT env = DEV\n      entity_type = dataset AND NOT platform = looker\n\n    Comparison operators (>, >=, <, <=):\n      columnCount > 10\n      columnCount >= 5\n      columnCount <= 100\n\n    Existence checks (IS NULL / IS NOT NULL):\n      glossary_term IS NOT NULL\n      tag IS NOT NULL\n      owner IS NULL\n\n    Complex:\n      entity_type = dataset AND env = PROD AND (platform = snowflake OR platform = bigquery)\n\n    SUPPORTED FILTER FIELDS:\n    - entity_type: dataset, dashboard, chart, corp_user, corp_group, dataProduct, etc.\n    - entity_subtype (or subtype): Table, View, Model, etc.\n    - platform: snowflake, bigquery, looker, tableau, etc.\n    - domain: full URN required, e.g. urn:li:domain:marketing\n    - container: full URN required, e.g. urn:li:container:abc123\n    - tag: full URN required, e.g. urn:li:tag:PII\n    - glossary_term: full URN required, e.g. urn:li:glossaryTerm:uuid\n    - owner: full URN required, e.g. urn:li:corpuser:alice or urn:li:corpGroup:team\n    - env: PROD, DEV, STAGING (only use if explicitly requested)\n    - status: NOT_SOFT_DELETED, ALL, ONLY_SOFT_DELETED\n    - deprecated: true or false (whether the entity is marked as deprecated)\n    - hasActiveIncidents: true or false (whether the entity has active incidents)\n    - hasFailingAssertions: true or false (whether the entity has failing assertions)\n    - columnCount: number of columns (from dataset profiling)\n\n    IMPORTANT: Domain, container, tag, glossary_term, and owner filters require\n    full URN format (urn:li:...). Search with entity_type = domain first to find\n    valid domain URNs, then use the exact URN from the results.\n\n    STRUCTURED PROPERTY FILTERS:\n    Use structuredProperties.<qualifiedName> as the field name. The qualifiedName\n    is the ID portion of the structured property URN (urn:li:structuredProperty:<qualifiedName>).\n      structuredProperties.io.acryl.privacy.retentionTime = 30\n      structuredProperties.31b94813-7667-4ae8-b93a-a72cc5e0c75b IN (Published, Certified)\n      structuredProperties.my.custom.property IS NOT NULL\n    Values are CASE-SENSITIVE. Some structured properties have fixed allowed values\n    (e.g. \"Published\", \"Certified\"). Use get_entities on the structured property URN\n    to check definition.allowedValues and match the exact casing.\n\n    Values containing special characters (spaces, =, parentheses) must be quoted:\n      tag = \"urn:li:tag:my tag\"\n      customProperties = \"key=value\"\n\nPAGINATION:\nUse offset to paginate through large lineage graphs:\n- offset=0, max_results=30 -> first 30 entities\n- offset=30, max_results=30 -> next 30 entities\n\nNote: Token budget constraints may return fewer entities than max_results.\nCheck the returned metadata (hasMore, returned, etc.) to understand truncation.\n\nQUERY PARAMETER - Search within lineage results:\nYou can filter lineage results using the `query` parameter with same /q syntax as search tool:\n- /q workspace.growthgestaofin -> find tables in specific schema\n- /q customer+transactions -> find entities with both terms\n- /q looker OR tableau -> find dashboards on either platform\n- /q * -> get all lineage results (default)\n\nExamples:\n- Find specific table in 643 downstreams: query=\"workspace.growthgestaofin.qs_retention\"\n- Find Looker dashboards in lineage: query=\"/q tag:looker\"\n- Get all results: query=\"*\" or omit parameter\n\nCOUNT PARAMETER - Control result size:\n- Default: 30 results\n- For aggregation: count=30 is sufficient (facets computed on ALL items server-side)\n- For finding specific item: Increase count or use query to filter\n- Example: count=100 for larger result sets\n\nWHEN TO USE QUERY vs COUNT:\n- User asks \"is X affected?\" -> Use query to filter for X specifically\n- Large lineage (>30 items) -> Keep count=30, use facets for aggregation\n- Need complete list -> Increase count only if total <=100\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "column": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "filter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "max_hops": {
+            "default": 1,
+            "type": "integer"
+          },
+          "max_results": {
+            "default": 30,
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "type": "integer"
+          },
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "upstream": {
+            "default": true,
+            "type": "boolean"
+          },
+          "urn": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "urn"
+        ],
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": [
+            "search"
+          ]
+        }
+      },
+      "name": "get_lineage",
+      "outputSchema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": null
+    },
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "Get SQL queries associated with a dataset or column to understand usage patterns.\n\nThis tool retrieves actual SQL queries that reference a specific dataset or column.\nUseful for understanding how data is used, common JOIN patterns, typical filters,\nand aggregation logic.\n\nPARAMETERS:\n\nsource - Filter by query origin:\n- \"MANUAL\": Queries written by users in query editors (real SQL patterns)\n- \"SYSTEM\": Queries extracted from BI tools/dashboards (production usage)\n- null: Return both types (default)\n\nCOMMON USE CASES:\n\n1. SQL Generation - Learn real query patterns:\n   get_dataset_queries(urn, source=\"MANUAL\", count=5-10)\n   \u2192 See how users actually write SQL against this table\n   \u2192 Discover common JOINs, aggregations, filters\n   \u2192 Match organizational SQL conventions and patterns\n\n2. Production usage analysis:\n   get_dataset_queries(urn, source=\"SYSTEM\", count=20)\n   \u2192 See how dashboards and reports query this data\n   \u2192 Understand which queries run in production\n   \u2192 Identify critical query patterns\n\n3. Column usage patterns:\n   get_dataset_queries(urn, column=\"customer_id\", source=\"MANUAL\", count=5)\n   \u2192 See how a specific column is used in queries\n   \u2192 Learn filtering and grouping patterns for that column\n   \u2192 Discover relationships via JOIN patterns\n\n4. General usage exploration:\n   get_dataset_queries(urn, count=10)\n   \u2192 Get mix of manual and system queries\n   \u2192 Understand overall table usage\n\nEXAMPLES:\n\n- Get manual queries for SQL generation:\n  get_dataset_queries(\n      urn=\"urn:li:dataset:(urn:li:dataPlatform:snowflake,prod.sales.orders,PROD)\",\n      source=\"MANUAL\",\n      count=10\n  )\n\n- Get dashboard queries (production usage):\n  get_dataset_queries(\n      urn=\"urn:li:dataset:(...)\",\n      source=\"SYSTEM\",\n      count=20\n  )\n\n- Column-specific query patterns:\n  get_dataset_queries(\n      urn=\"urn:li:dataset:(...)\",\n      column=\"created_at\",\n      source=\"MANUAL\",\n      count=5\n  )\n\nRESPONSE STRUCTURE:\n- total: Total number of queries matching criteria\n- start: Starting offset\n- count: Number of results returned\n- queries: Array of query objects with:\n  - urn: Query identifier\n  - properties.statement.value: The actual SQL text\n  - properties.statement.language: Query language (SQL, etc.)\n  - properties.source: MANUAL or SYSTEM\n  - properties.name: Optional query name\n  - platform: Source platform\n  - subjects: Referenced datasets/columns (deduplicated to dataset URNs)\n\nANALYZING RETRIEVED QUERIES:\nOnce you retrieve queries, examine the SQL statements to identify:\n- JOIN patterns: Which tables are joined? On what keys?\n- Aggregations: Common SUM, COUNT, AVG, GROUP BY patterns\n- Filters: Typical WHERE clauses, date range logic\n- Column usage: Which columns appear frequently vs rarely\n- CTEs and subqueries: Complex query structures\n\nBEST PRACTICES:\n- For SQL generation: Use source=\"MANUAL\" (count=5-10) to see real user patterns\n- For production analysis: Use source=\"SYSTEM\" to see dashboard/report queries\n- Start with moderate count (5-10) to avoid overwhelming context\n- If no queries found (total=0), proceed without query examples - not all tables have queries\n- Parse the SQL statements yourself to find patterns - they are not full-text searchable\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "column": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "count": {
+            "default": 10,
+            "type": "integer"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "enum": [
+                  "MANUAL",
+                  "SYSTEM"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "start": {
+            "default": 0,
+            "type": "integer"
+          },
+          "urn": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "urn"
+        ],
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": [
+            "search"
+          ]
+        }
+      },
+      "name": "get_dataset_queries",
+      "outputSchema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": null
+    },
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "Get detailed information about one or more entities by their DataHub URNs.\n\nIMPORTANT: Pass an array of URNs to retrieve multiple entities in a single call - this is much\nmore efficient than calling this tool multiple times. When examining search results, always pass\nan array with the top 3-10 result URNs to compare and find the best match.\n\nAccepts an array of URNs or a single URN. Supports all entity types including datasets,\nassertions, incidents, dashboards, charts, users, groups, and more. The response fields vary\nbased on the entity type.\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "urns": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "urns"
+        ],
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": [
+            "search"
+          ]
+        }
+      },
+      "name": "get_entities",
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "title": null
+    },
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "List schema fields for a dataset, with optional keyword filtering and pagination.\n\nUseful when schema fields were truncated in search results (schemaFieldsTruncated present)\nand you need to explore specific columns. Supports pagination for large schemas.\n\nArgs:\n    urn: Dataset URN\n    keywords: Optional list of keywords to filter schema fields (OR matching).\n             - Single keyword: Treated as one keyword (NOT split on whitespace). Use for field names or exact phrases.\n             - Multiple keywords: Multiple keywords, matches any (OR logic).\n             - None or empty list: Returns all fields in priority order (same as get_entities).\n             Matches against fieldPath, description, label, tags, and glossary terms.\n             Matching fields are returned first, sorted by match count.\n    limit: Maximum number of fields to return (default: 100)\n    offset: Number of fields to skip for pagination (default: 0)\n\nReturns:\n    Dictionary with:\n    - urn: The dataset URN\n    - fields: List of schema fields (paginated)\n    - totalFields: Total number of fields in the schema\n    - returned: Number of fields actually returned\n    - remainingCount: Number of fields not included after offset (accounts for limit and token budget)\n    - matchingCount: Number of fields that matched keywords (if keywords provided, None otherwise)\n    - offset: The offset used\n\nExamples:\n    # Single keyword (list) - search for exact field name or phrase\n    list_schema_fields(urn=\"urn:li:dataset:(...)\", keywords=[\"user_email\"])\n    # Returns fields matching \"user_email\" (like user_email_address, primary_user_email)\n\n    # Multiple keywords (list) - OR matching\n    list_schema_fields(urn=\"urn:li:dataset:(...)\", keywords=[\"email\", \"user\"])\n    # Returns fields containing \"email\" OR \"user\" (user_email, contact_email, user_id, etc.)\n\n    # Pagination through all fields\n    list_schema_fields(urn=\"urn:li:dataset:(...)\", limit=100, offset=0)   # First 100\n    list_schema_fields(urn=\"urn:li:dataset:(...)\", limit=100, offset=100) # Next 100\n\n    # Combine filtering + pagination\n    list_schema_fields(urn=\"urn:li:dataset:(...)\", keywords=[\"user\"], limit=50, offset=0)\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "keywords": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional list of keywords to filter schema fields (OR matching).\n     - Single keyword: Treated as one keyword (NOT split on whitespace). Use for field names or exact phrases.\n     - Multiple keywords: Multiple keywords, matches any (OR logic).\n     - None or empty list: Returns all fields in priority order (same as get_entities).\n     Matches against fieldPath, description, label, tags, and glossary terms.\n     Matching fields are returned first, sorted by match count."
+          },
+          "limit": {
+            "default": 100,
+            "description": "Maximum number of fields to return (default: 100)",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "description": "Number of fields to skip for pagination (default: 0)",
+            "type": "integer"
+          },
+          "urn": {
+            "description": "Dataset URN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "urn"
+        ],
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": [
+            "search"
+          ]
+        }
+      },
+      "name": "list_schema_fields",
+      "outputSchema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": null
+    },
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "Get detailed lineage path(s) between two specific entities or columns.\n\nReturns the paths array from searchAcrossLineage, showing the exact transformation\nchain(s) including intermediate entities, columns, and transformation query URNs.\n\nUnlike get_lineage() which returns all lineage targets with compact lineageColumns,\nthis tool focuses on ONE specific target and returns detailed path information.\n\nArgs:\n    source_urn: URN of the source dataset\n    target_urn: URN of the target dataset\n    source_column: Optional column name in source dataset\n    target_column: Optional column name in target dataset (required if source_column provided)\n    direction: Optional direction to search. If None (default), automatically discovers\n              the path by trying downstream first, then upstream. Specify \"downstream\" or\n              \"upstream\" explicitly for better performance if you know the direction.\n\nReturns:\n    Dictionary with:\n    - source: Source entity/column info\n    - target: Target entity/column info\n    - paths: Array of path objects from GraphQL (with QUERY URNs)\n    - pathCount: Number of paths found\n\nExamples:\n    # Column-level paths\n    paths_result = get_lineage_paths_between(\n        source_urn=\"urn:li:dataset:(urn:li:dataPlatform:snowflake,db.schema.base_table,PROD)\",\n        target_urn=\"urn:li:dataset:(urn:li:dataPlatform:snowflake,db.schema.final_table,PROD)\",\n        source_column=\"user_id\",\n        target_column=\"customer_id\"\n    )\n    # Returns paths with QUERY URNs showing transformation chain\n\n    # Fetch SQL for specific query of interest\n    query_details = get_entities(paths_result[\"paths\"][0][\"path\"][1][\"urn\"])\n\n    # Dataset-level paths (auto-discover direction)\n    get_lineage_paths_between(\n        source_urn=\"urn:li:dataset:(...):base_table\",\n        target_urn=\"urn:li:dataset:(...):final_table\"\n    )\n\n    # Explicit direction for better performance\n    get_lineage_paths_between(\n        source_urn=\"urn:li:dataset:(...):base_table\",\n        target_urn=\"urn:li:dataset:(...):final_table\",\n        direction=\"downstream\"\n    )\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "direction": {
+            "anyOf": [
+              {
+                "enum": [
+                  "upstream",
+                  "downstream"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional direction to search. If None (default), automatically discovers\n      the path by trying downstream first, then upstream. Specify \"downstream\" or\n      \"upstream\" explicitly for better performance if you know the direction."
+          },
+          "source_column": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional column name in source dataset"
+          },
+          "source_urn": {
+            "description": "URN of the source dataset",
+            "type": "string"
+          },
+          "target_column": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Optional column name in target dataset (required if source_column provided)"
+          },
+          "target_urn": {
+            "description": "URN of the target dataset",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_urn",
+          "target_urn"
+        ],
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": [
+            "search"
+          ]
+        }
+      },
+      "name": "get_lineage_paths_between",
+      "outputSchema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": null
+    },
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "Search for documents stored in the customer's DataHub deployment.\n\nThese are the organization's own documents (runbooks, FAQs, knowledge articles)\ningested from sources like Notion, Confluence, etc. - not DataHub documentation.\n\nReturns document metadata WITHOUT content to keep responses concise.\nUse get_entities() with a document URN to retrieve full content when needed.\n\nHYBRID SEARCH (recommended for natural language queries):\nWhen both query and semantic_query are provided, runs keyword and semantic\nsearches in parallel and merges results intelligently:\n- Results are deduplicated by URN\n- Top keyword result appears first (exact match priority)\n- Each result includes searchType: \"keyword\", \"semantic\", or \"both\"\n- Results appearing in both searches are high-confidence matches\n\nExample: search_documents(\n    query=\"kubernetes deployment\",\n    semantic_query=\"how do I deploy applications to kubernetes cluster\"\n)\n\nKEYWORD SEARCH (query parameter):\n- Full-text search with boolean logic\n- Use /q prefix for structured queries\n- Best for: exact terms, known keywords, specific phrases\n- Examples:\n  * /q deployment guide \u2192 documents containing both terms\n  * /q kubernetes OR k8s \u2192 documents with either term\n  * /q \"production deployment\" \u2192 exact phrase match\n\nSEMANTIC SEARCH (semantic_query parameter):\n- Uses AI embeddings to find conceptually related documents\n- Best for: natural language questions, finding related topics\n- Only use when the query expresses intent/meaning, not for keyword lookups\n- Example: \"how to deploy\" finds deployment guides, CI/CD docs, release runbooks\n\nFILTER SYNTAX (SQL-like WHERE clause):\n  Uses simple SQL-like syntax with AND, OR, NOT, and parentheses.\n\n  Basic filters:\n    platform = notion\n    subtype = Runbook\n    domain = urn:li:domain:engineering\n\n  Multiple values (IN):\n    platform IN (notion, confluence)\n    subtype IN (Runbook, FAQ, Tutorial)\n\n  Combining filters:\n    platform = notion AND domain = urn:li:domain:engineering\n    subtype = Runbook AND tag = urn:li:tag:critical\n\n  OR and parentheses:\n    platform = notion OR platform = confluence\n    subtype = Runbook AND (platform = notion OR platform = confluence)\n\n  NOT:\n    NOT platform = datahub\n    subtype = Runbook AND NOT tag = urn:li:tag:deprecated\n\n  SUPPORTED FILTER FIELDS:\n  - subtype (or entity_subtype): Runbook, FAQ, Tutorial, Reference, etc.\n  - platform: notion, confluence, datahub, etc.\n  - domain: full URN required, e.g. urn:li:domain:engineering\n  - tag: full URN required, e.g. urn:li:tag:critical\n  - glossary_term: full URN required, e.g. urn:li:glossaryTerm:pii\n  - owner: full URN required, e.g. urn:li:corpuser:alice or urn:li:corpGroup:team\n\n  Values containing special characters (spaces, =, parentheses) must be quoted:\n    tag = \"urn:li:tag:my tag\"\n\nPAGINATION:\n- num_results: Number of results per page (max: 50)\n- offset: Starting position (default: 0)\n\nFACET DISCOVERY:\n- Set num_results=0 to get ONLY facets (no results)\n- Useful for discovering what platforms, domains exist\n\nEXAMPLE WORKFLOWS:\n\n1. Hybrid search for deployment docs:\n   search_documents(\n       query=\"kubernetes deployment\",\n       semantic_query=\"how to deploy applications to production\"\n   )\n\n2. Keyword-only search filtered by platform:\n   search_documents(query=\"deployment\", filter=\"platform = notion\")\n\n3. Discover document sources:\n   search_documents(num_results=0)\n   \u2192 Examine facets to see available platforms, domains\n\n4. Find engineering team's critical docs:\n   search_documents(filter=\"domain = urn:li:domain:engineering AND tag = urn:li:tag:critical\")\n\n5. Find all runbooks from Notion or Confluence:\n   search_documents(filter=\"subtype = Runbook AND platform IN (notion, confluence)\")\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "filter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "num_results": {
+            "default": 10,
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "type": "integer"
+          },
+          "query": {
+            "default": "*",
+            "type": "string"
+          },
+          "semantic_query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": []
+        }
+      },
+      "name": "search_documents",
+      "outputSchema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": null
+    },
+    {
+      "annotations": {
+        "destructiveHint": null,
+        "idempotentHint": null,
+        "openWorldHint": null,
+        "readOnlyHint": true,
+        "title": null
+      },
+      "description": "Search within document content using regex patterns.\n\nSimilar to ripgrep/grep - finds matching excerpts within documents.\nUse search_documents() first to find relevant document URNs, then use this\ntool to search within their content.\n\nPATTERN SYNTAX (RE2 regex):\n- Simple text: \"deploy\" matches the word deploy\n- Case insensitive: \"(?i)deploy\" matches Deploy, DEPLOY, deploy\n- Word boundaries: r\"\\bword\\b\" matches whole word only\n- Alternatives: \"deploy|release\" matches either term\n- Wildcards: \"deploy.*prod\" matches deploy followed by prod\n- Character classes: \"[Dd]eploy\" matches Deploy or deploy\n\nPARAMETERS:\n\nurns: List of document URNs to search within\n- Get these from search_documents() results\n- Example: [\"urn:li:document:doc1\", \"urn:li:document:doc2\"]\n\npattern: Regex pattern to search for\n- Examples: \"kubernetes\", \"(?i)deploy.*production\", \"error|warning\"\n- Use \".*\" to get raw content (for continuing after truncation)\n\ncontext_chars: Characters to show before/after each match (default: 200)\n- Higher values show more surrounding context\n- When reading raw content (pattern=\".*\"), use higher values (e.g., 8000)\n\nmax_matches_per_doc: Maximum matches to return per document (default: 5)\n- Limits output size for documents with many matches\n\nstart_offset: Character offset to start searching from (default: 0)\n- Use this to continue reading after get_entities() truncation\n- When get_entities() returns _truncatedAtChar=8000, use start_offset=8000\n  to continue reading from where it left off\n\nEXAMPLE WORKFLOWS:\n\n1. Find deployment instructions:\n   docs = search_documents(query=\"deployment\", filter=\"subtype = Runbook\")\n   urns = [r[\"entity\"][\"urn\"] for r in docs[\"searchResults\"]]\n   grep_documents(urns, pattern=\"kubectl apply\", context_chars=300)\n\n2. Find all error handling sections (case insensitive):\n   grep_documents(urns, pattern=\"(?i)error|exception|failure\")\n\n3. Find specific configuration values:\n   grep_documents(urns, pattern=r\"timeout.*=.*\\d+\")\n\n4. Continue reading after truncation (when get_entities returns _truncatedAtChar):\n   # After get_entities() shows: _truncatedAtChar=8000, _originalLengthChars=15000\n   grep_documents(urns=[doc_urn], pattern=\".*\", context_chars=8000, start_offset=8000)\n   # Returns content from char 8000 onwards\n\nRETURNS:\n- results: List of documents with matches, each containing:\n  - urn: Document URN\n  - title: Document title\n  - matches: List of excerpts with position info (positions are absolute)\n  - total_matches: Total matches found (may exceed max_matches_per_doc)\n  - content_length: Total length of document content (when start_offset is used)\n- total_matches: Total matches across all documents\n- documents_with_matches: Number of documents containing matches\n",
+      "execution": null,
+      "icons": null,
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "context_chars": {
+            "default": 200,
+            "type": "integer"
+          },
+          "max_matches_per_doc": {
+            "default": 5,
+            "type": "integer"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "start_offset": {
+            "default": 0,
+            "type": "integer"
+          },
+          "urns": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "urns",
+          "pattern"
+        ],
+        "type": "object"
+      },
+      "meta": {
+        "fastmcp": {
+          "tags": []
+        }
+      },
+      "name": "grep_documents",
+      "outputSchema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": null
+    }
+  ]
+}

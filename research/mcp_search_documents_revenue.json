@@ -1,0 +1,397 @@
+{
+  "arguments": {
+    "num_results": 10,
+    "offset": 0,
+    "query": "revenue",
+    "semantic_query": "revenue orders dashboard owner runbook"
+  },
+  "result": {
+    "content": [
+      {
+        "annotations": null,
+        "meta": null,
+        "parsed_json": {
+          "count": 10,
+          "facets": [
+            {
+              "aggregations": [
+                {
+                  "count": 10,
+                  "value": "DOCUMENT"
+                },
+                {
+                  "count": 6,
+                  "value": "DOCUMENT\u241eTable Overview"
+                },
+                {
+                  "count": 2,
+                  "value": "DOCUMENT\u241eRunbook"
+                },
+                {
+                  "count": 1,
+                  "value": "DOCUMENT\u241eReference"
+                },
+                {
+                  "count": 1,
+                  "value": "DOCUMENT\u241eOverview"
+                }
+              ],
+              "displayName": "Type\u241eSub Type",
+              "field": "_entityType\u241etypeNames"
+            },
+            {
+              "aggregations": [
+                {
+                  "count": 6,
+                  "value": "Table Overview"
+                },
+                {
+                  "count": 2,
+                  "value": "Runbook"
+                },
+                {
+                  "count": 1,
+                  "value": "Reference"
+                },
+                {
+                  "count": 1,
+                  "value": "Overview"
+                }
+              ],
+              "displayName": "Sub Type",
+              "field": "typeNames"
+            },
+            {
+              "aggregations": [
+                {
+                  "count": 10,
+                  "value": "DOCUMENT"
+                }
+              ],
+              "displayName": "Type",
+              "field": "_entityType"
+            },
+            {
+              "aggregations": [
+                {
+                  "count": 0,
+                  "value": "true"
+                }
+              ],
+              "displayName": "removed",
+              "field": "removed"
+            },
+            {
+              "aggregations": [
+                {
+                  "count": 10,
+                  "value": "DOCUMENT"
+                }
+              ],
+              "displayName": "Type",
+              "field": "entity"
+            }
+          ],
+          "searchResults": [
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Runbook: Promotion Attribution Issues"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Runbook",
+                "urn": "urn:li:document:ecomm-runbook-promotions"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Order Details View"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Table Overview",
+                "urn": "urn:li:document:ecomm-order-details"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Key Metrics Reference"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Reference",
+                "urn": "urn:li:document:ecomm-metrics"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Orders Table"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Table Overview",
+                "urn": "urn:li:document:ecomm-orders"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Core Transactional Tables"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Overview",
+                "urn": "urn:li:document:ecomm-source-tables"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Addresses Table"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Table Overview",
+                "urn": "urn:li:document:ecomm-addresses"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Order Items Table"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Table Overview",
+                "urn": "urn:li:document:ecomm-order-items"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Products Table"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Table Overview",
+                "urn": "urn:li:document:ecomm-products"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Runbook: Order Count Discrepancy"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Runbook",
+                "urn": "urn:li:document:ecomm-runbook-order-count"
+              },
+              "searchType": "keyword"
+            },
+            {
+              "entity": {
+                "info": {
+                  "created": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "lastModified": {
+                    "actor": {
+                      "urn": "urn:li:corpuser:b2fd91.bryan@example.com"
+                    },
+                    "time": 1769615173327
+                  },
+                  "source": {
+                    "sourceType": "NATIVE"
+                  },
+                  "title": "Customers Table"
+                },
+                "platform": {
+                  "name": "datahub",
+                  "urn": "urn:li:dataPlatform:datahub"
+                },
+                "subType": "Table Overview",
+                "urn": "urn:li:document:ecomm-customers"
+              },
+              "searchType": "keyword"
+            }
+          ],
+          "start": 0,
+          "total": 10
+        },
+        "text": "{\"start\":0,\"count\":10,\"total\":10,\"searchResults\":[{\"entity\":{\"urn\":\"urn:li:document:ecomm-runbook-promotions\",\"subType\":\"Runbook\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Runbook: Promotion Attribution Issues\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-order-details\",\"subType\":\"Table Overview\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Order Details View\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-metrics\",\"subType\":\"Reference\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Key Metrics Reference\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-orders\",\"subType\":\"Table Overview\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Orders Table\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-source-tables\",\"subType\":\"Overview\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Core Transactional Tables\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-addresses\",\"subType\":\"Table Overview\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Addresses Table\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-order-items\",\"subType\":\"Table Overview\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Order Items Table\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-products\",\"subType\":\"Table Overview\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Products Table\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-runbook-order-count\",\"subType\":\"Runbook\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Runbook: Order Count Discrepancy\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"},{\"entity\":{\"urn\":\"urn:li:document:ecomm-customers\",\"subType\":\"Table Overview\",\"platform\":{\"urn\":\"urn:li:dataPlatform:datahub\",\"name\":\"datahub\"},\"info\":{\"title\":\"Customers Table\",\"source\":{\"sourceType\":\"NATIVE\"},\"lastModified\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}},\"created\":{\"time\":1769615173327,\"actor\":{\"urn\":\"urn:li:corpuser:b2fd91.bryan@example.com\"}}}},\"searchType\":\"keyword\"}],\"facets\":[{\"field\":\"_entityType\u241etypeNames\",\"displayName\":\"Type\u241eSub Type\",\"aggregations\":[{\"value\":\"DOCUMENT\",\"count\":10},{\"value\":\"DOCUMENT\u241eTable Overview\",\"count\":6},{\"value\":\"DOCUMENT\u241eRunbook\",\"count\":2},{\"value\":\"DOCUMENT\u241eReference\",\"count\":1},{\"value\":\"DOCUMENT\u241eOverview\",\"count\":1}]},{\"field\":\"typeNames\",\"displayName\":\"Sub Type\",\"aggregations\":[{\"value\":\"Table Overview\",\"count\":6},{\"value\":\"Runbook\",\"count\":2},{\"value\":\"Reference\",\"count\":1},{\"value\":\"Overview\",\"count\":1}]},{\"field\":\"_entityType\",\"displayName\":\"Type\",\"aggregations\":[{\"value\":\"DOCUMENT\",\"count\":10}]},{\"field\":\"removed\",\"displayName\":\"removed\",\"aggregations\":[{\"value\":\"true\",\"count\":0}]},{\"field\":\"entity\",\"displayName\":\"Type\",\"aggregations\":[{\"value\":\"DOCUMENT\",\"count\":10}]}]}",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  },
+  "tool": "search_documents"
+}

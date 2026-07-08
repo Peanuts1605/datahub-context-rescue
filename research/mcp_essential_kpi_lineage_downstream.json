@@ -1,0 +1,466 @@
+{
+  "arguments": {
+    "max_hops": 3,
+    "max_results": 30,
+    "offset": 0,
+    "upstream": false,
+    "urn": "urn:li:dataset:(urn:li:dataPlatform:powerbi,b2fd91.datahub_order_entries.Essential_KPI_Measures,PROD)"
+  },
+  "result": {
+    "content": [
+      {
+        "annotations": null,
+        "meta": null,
+        "parsed_json": {
+          "downstreams": {
+            "facets": [
+              {
+                "aggregations": [
+                  {
+                    "count": 0,
+                    "value": "1"
+                  },
+                  {
+                    "count": 0,
+                    "value": "2"
+                  },
+                  {
+                    "count": 0,
+                    "value": "3+"
+                  }
+                ],
+                "displayName": "Degree of Dependencies",
+                "field": "degree"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 4,
+                    "value": "CHART"
+                  },
+                  {
+                    "count": 1,
+                    "value": "DASHBOARD"
+                  }
+                ],
+                "displayName": "Type",
+                "field": "_entityType"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 4,
+                    "value": "PowerBI Page"
+                  },
+                  {
+                    "count": 1,
+                    "value": "Report"
+                  }
+                ],
+                "displayName": "Sub Type",
+                "field": "typeNames"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 5,
+                    "entity": {
+                      "urn": "urn:li:dataPlatform:powerbi"
+                    },
+                    "value": "urn:li:dataPlatform:powerbi"
+                  }
+                ],
+                "displayName": "Platform",
+                "field": "platform"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 1,
+                    "entity": {
+                      "urn": "urn:li:glossaryTerm:b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a"
+                    },
+                    "value": "urn:li:glossaryTerm:b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a"
+                  }
+                ],
+                "displayName": "Glossary Term",
+                "field": "glossaryTerms"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 5,
+                    "entity": {
+                      "urn": "urn:li:container:a1b63f1e0516d47949181f804bc4ae9b"
+                    },
+                    "value": "urn:li:container:a1b63f1e0516d47949181f804bc4ae9b"
+                  }
+                ],
+                "displayName": "Container",
+                "field": "container"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 1,
+                    "entity": {
+                      "urn": "urn:li:corpuser:b2fd91.alex@example.com"
+                    },
+                    "value": "urn:li:corpuser:b2fd91.alex@example.com"
+                  },
+                  {
+                    "count": 1,
+                    "entity": {
+                      "urn": "urn:li:corpuser:b2fd91.michael@example.com"
+                    },
+                    "value": "urn:li:corpuser:b2fd91.michael@example.com"
+                  },
+                  {
+                    "count": 1,
+                    "entity": {
+                      "urn": "urn:li:corpuser:b2fd91.patrick1@example.com"
+                    },
+                    "value": "urn:li:corpuser:b2fd91.patrick1@example.com"
+                  }
+                ],
+                "displayName": "Owned By",
+                "field": "owners"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 4,
+                    "value": "CHART\u241ePowerBI Page"
+                  },
+                  {
+                    "count": 4,
+                    "value": "CHART"
+                  },
+                  {
+                    "count": 1,
+                    "value": "DASHBOARD\u241eReport"
+                  },
+                  {
+                    "count": 1,
+                    "value": "DASHBOARD"
+                  }
+                ],
+                "displayName": "Type\u241eSub Type",
+                "field": "_entityType\u241etypeNames"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 0,
+                    "value": "true"
+                  }
+                ],
+                "displayName": "removed",
+                "field": "removed"
+              },
+              {
+                "aggregations": [
+                  {
+                    "count": 4,
+                    "value": "CHART"
+                  },
+                  {
+                    "count": 1,
+                    "value": "DASHBOARD"
+                  }
+                ],
+                "displayName": "Type",
+                "field": "entity"
+              }
+            ],
+            "hasMore": false,
+            "offset": 0,
+            "returned": 5,
+            "searchResults": [
+              {
+                "degree": 1,
+                "entity": {
+                  "dashboardId": "b2fd91.reports.66666666-7777-8888-9999-000000000000",
+                  "editableProperties": {
+                    "description": "This dashboard gives your team a real-time view of incoming orders and processing status. You can see order volume trends, identify bottlenecks in fulfillment, and track key metrics like average order value and processing times.\n\nThe main view shows today's orders alongside weekly and monthly comparisons, so you can spot patterns or unusual spikes quickly. Filter by product category, sales rep, or customer type to drill down into specific segments. The processing status section highlights orders that need attention, whether they're stuck in review, waiting for inventory, or ready to ship.\n\nUse this dashboard during daily standup meetings to prioritize work, or check it throughout the day to stay on top of order flow. Sales managers can monitor team performance, while operations folks can identify where orders are getting delayed and take action before customers start calling."
+                  },
+                  "glossaryTerms": {
+                    "terms": [
+                      {
+                        "term": {
+                          "hierarchicalName": "b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a",
+                          "parentNodes": {
+                            "count": 1,
+                            "nodes": [
+                              {
+                                "properties": {
+                                  "name": "Classification"
+                                },
+                                "urn": "urn:li:glossaryNode:b2fd91.9fc2293a-b772-44de-84c8-cfa9021e5825"
+                              }
+                            ]
+                          },
+                          "properties": {
+                            "description": "# Personally Identifiable Information\n\nPersonally Identifiable Information (PII) refers to any data that can be used to identify a specific individual, either directly or indirectly when combined with other information. Dataset and column contents can be inferred either by the dataset or column name, description, or column sample values.\n\n## Direct Identifiers\n\nAny dataset or column that contains the following information:\n\n*   Full name\n    \n*   First name\n    \n*   Middle name\n    \n*   Last name\n    \n*   Social Security Number or national ID\n    \n*   Driver's license number\n    \n*   Passport number\n    \n*   Email address\n    \n*   Phone number\n    \n*   Physical address\n    \n*   Biometric data (fingerprints, facial recognition)\n    \n*   Account numbers\n    \n*   IP address (in some jurisdictions)\n    \n\n## Indirect Identifiers\n\nAny dataset or column that contains the following information:\n\n*   Date of birth\n    \n*   Place of birth\n    \n*   Gender\n    \n*   Race/ethnicity\n    \n*   Job title and workplace\n    \n*   Education information\n    \n*   Geographic indicators\n    \n*   Medical information\n    \n*   Vehicle registration information",
+                            "name": "PII",
+                            "termSource": "INTERNAL"
+                          },
+                          "urn": "urn:li:glossaryTerm:b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a"
+                        }
+                      }
+                    ]
+                  },
+                  "health": [
+                    {
+                      "status": "PASS",
+                      "type": "INCIDENTS"
+                    }
+                  ],
+                  "ownership": {
+                    "owners": [
+                      {
+                        "owner": {
+                          "properties": {
+                            "active": true,
+                            "displayName": "Sarah Chen",
+                            "email": "sarah.chen@example.com",
+                            "title": "Senior Data Analyst"
+                          },
+                          "urn": "urn:li:corpuser:b2fd91.sam@example.com"
+                        },
+                        "ownershipType": {
+                          "info": {
+                            "description": "No ownership type specified.",
+                            "name": "None"
+                          },
+                          "type": "CUSTOM_OWNERSHIP_TYPE",
+                          "urn": "urn:li:ownershipType:__system__none"
+                        },
+                        "type": "NONE"
+                      },
+                      {
+                        "owner": {
+                          "editableProperties": {
+                            "title": "Product Manager"
+                          },
+                          "properties": {
+                            "active": true,
+                            "displayName": "Marco Santos",
+                            "email": "marco.santos@example.com",
+                            "title": "Senior Software Engineer"
+                          },
+                          "urn": "urn:li:corpuser:b2fd91.michael@example.com"
+                        },
+                        "ownershipType": {
+                          "info": {
+                            "description": "No ownership type specified.",
+                            "name": "None"
+                          },
+                          "type": "CUSTOM_OWNERSHIP_TYPE",
+                          "urn": "urn:li:ownershipType:__system__none"
+                        },
+                        "type": "NONE"
+                      },
+                      {
+                        "owner": {
+                          "properties": {
+                            "active": true,
+                            "displayName": "Priya Sharma",
+                            "email": "priya.sharma@example.com",
+                            "title": "Data Steward"
+                          },
+                          "urn": "urn:li:corpuser:b2fd91.patrick1@example.com"
+                        },
+                        "ownershipType": {
+                          "info": {
+                            "description": "No ownership type specified.",
+                            "name": "None"
+                          },
+                          "type": "CUSTOM_OWNERSHIP_TYPE",
+                          "urn": "urn:li:ownershipType:__system__none"
+                        },
+                        "type": "NONE"
+                      },
+                      {
+                        "owner": {
+                          "editableProperties": {
+                            "title": "Data Engineer"
+                          },
+                          "properties": {
+                            "active": true,
+                            "displayName": "Andrea Garcia",
+                            "email": "andrea.garcia@example.com",
+                            "title": "Analytics Engineer"
+                          },
+                          "urn": "urn:li:corpuser:b2fd91.alex@example.com"
+                        },
+                        "ownershipType": {
+                          "info": {
+                            "description": "No ownership type specified.",
+                            "name": "None"
+                          },
+                          "type": "CUSTOM_OWNERSHIP_TYPE",
+                          "urn": "urn:li:ownershipType:__system__none"
+                        },
+                        "type": "NONE"
+                      }
+                    ]
+                  },
+                  "platform": {
+                    "name": "powerbi",
+                    "urn": "urn:li:dataPlatform:powerbi"
+                  },
+                  "properties": {
+                    "description": "",
+                    "externalUrl": "https://app.powerbi.com/groups/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/reports/66666666-7777-8888-9999-000000000000",
+                    "lastModified": {
+                      "time": 13855410516
+                    },
+                    "name": "datahub_order_entries"
+                  },
+                  "subTypes": {
+                    "typeNames": [
+                      "Report"
+                    ]
+                  },
+                  "tool": "powerbi",
+                  "type": "DASHBOARD",
+                  "urn": "urn:li:dashboard:(powerbi,b2fd91.reports.66666666-7777-8888-9999-000000000000)"
+                }
+              },
+              {
+                "degree": 1,
+                "entity": {
+                  "chartId": "b2fd91.pages.66666666-7777-8888-9999-000000000000.217abe0d5c1cd421c384",
+                  "health": [
+                    {
+                      "status": "PASS",
+                      "type": "INCIDENTS"
+                    }
+                  ],
+                  "platform": {
+                    "name": "powerbi",
+                    "urn": "urn:li:dataPlatform:powerbi"
+                  },
+                  "properties": {
+                    "description": "Customer Analysis",
+                    "lastModified": {
+                      "time": 13855410516
+                    },
+                    "name": "Customer Analysis"
+                  },
+                  "subTypes": {
+                    "typeNames": [
+                      "PowerBI Page"
+                    ]
+                  },
+                  "tool": "powerbi",
+                  "type": "CHART",
+                  "urn": "urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.217abe0d5c1cd421c384)"
+                }
+              },
+              {
+                "degree": 1,
+                "entity": {
+                  "chartId": "b2fd91.pages.66666666-7777-8888-9999-000000000000.3f48c0bf859b2d14dcd0",
+                  "health": [
+                    {
+                      "status": "PASS",
+                      "type": "INCIDENTS"
+                    }
+                  ],
+                  "platform": {
+                    "name": "powerbi",
+                    "urn": "urn:li:dataPlatform:powerbi"
+                  },
+                  "properties": {
+                    "description": "Geographics",
+                    "lastModified": {
+                      "time": 13855410516
+                    },
+                    "name": "Geographics"
+                  },
+                  "subTypes": {
+                    "typeNames": [
+                      "PowerBI Page"
+                    ]
+                  },
+                  "tool": "powerbi",
+                  "type": "CHART",
+                  "urn": "urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.3f48c0bf859b2d14dcd0)"
+                }
+              },
+              {
+                "degree": 1,
+                "entity": {
+                  "chartId": "b2fd91.pages.66666666-7777-8888-9999-000000000000.83a9aaa3207edd6c721e",
+                  "health": [
+                    {
+                      "status": "PASS",
+                      "type": "INCIDENTS"
+                    }
+                  ],
+                  "platform": {
+                    "name": "powerbi",
+                    "urn": "urn:li:dataPlatform:powerbi"
+                  },
+                  "properties": {
+                    "description": "Executive Summary",
+                    "lastModified": {
+                      "time": 13855410516
+                    },
+                    "name": "Executive Summary"
+                  },
+                  "subTypes": {
+                    "typeNames": [
+                      "PowerBI Page"
+                    ]
+                  },
+                  "tool": "powerbi",
+                  "type": "CHART",
+                  "urn": "urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.83a9aaa3207edd6c721e)"
+                }
+              },
+              {
+                "degree": 1,
+                "entity": {
+                  "chartId": "b2fd91.pages.66666666-7777-8888-9999-000000000000.85e432543b30346a0507",
+                  "health": [
+                    {
+                      "status": "PASS",
+                      "type": "INCIDENTS"
+                    }
+                  ],
+                  "platform": {
+                    "name": "powerbi",
+                    "urn": "urn:li:dataPlatform:powerbi"
+                  },
+                  "properties": {
+                    "description": "DAX Visual",
+                    "lastModified": {
+                      "time": 13855410516
+                    },
+                    "name": "DAX Visual"
+                  },
+                  "subTypes": {
+                    "typeNames": [
+                      "PowerBI Page"
+                    ]
+                  },
+                  "tool": "powerbi",
+                  "type": "CHART",
+                  "urn": "urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.85e432543b30346a0507)"
+                }
+              }
+            ],
+            "total": 5
+          }
+        },
+        "text": "{\"downstreams\":{\"total\":5,\"facets\":[{\"field\":\"degree\",\"displayName\":\"Degree of Dependencies\",\"aggregations\":[{\"value\":\"1\",\"count\":0},{\"value\":\"2\",\"count\":0},{\"value\":\"3+\",\"count\":0}]},{\"field\":\"_entityType\",\"displayName\":\"Type\",\"aggregations\":[{\"value\":\"CHART\",\"count\":4},{\"value\":\"DASHBOARD\",\"count\":1}]},{\"field\":\"typeNames\",\"displayName\":\"Sub Type\",\"aggregations\":[{\"value\":\"PowerBI Page\",\"count\":4},{\"value\":\"Report\",\"count\":1}]},{\"field\":\"platform\",\"displayName\":\"Platform\",\"aggregations\":[{\"value\":\"urn:li:dataPlatform:powerbi\",\"count\":5,\"entity\":{\"urn\":\"urn:li:dataPlatform:powerbi\"}}]},{\"field\":\"glossaryTerms\",\"displayName\":\"Glossary Term\",\"aggregations\":[{\"value\":\"urn:li:glossaryTerm:b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a\",\"count\":1,\"entity\":{\"urn\":\"urn:li:glossaryTerm:b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a\"}}]},{\"field\":\"container\",\"displayName\":\"Container\",\"aggregations\":[{\"value\":\"urn:li:container:a1b63f1e0516d47949181f804bc4ae9b\",\"count\":5,\"entity\":{\"urn\":\"urn:li:container:a1b63f1e0516d47949181f804bc4ae9b\"}}]},{\"field\":\"owners\",\"displayName\":\"Owned By\",\"aggregations\":[{\"value\":\"urn:li:corpuser:b2fd91.alex@example.com\",\"count\":1,\"entity\":{\"urn\":\"urn:li:corpuser:b2fd91.alex@example.com\"}},{\"value\":\"urn:li:corpuser:b2fd91.michael@example.com\",\"count\":1,\"entity\":{\"urn\":\"urn:li:corpuser:b2fd91.michael@example.com\"}},{\"value\":\"urn:li:corpuser:b2fd91.patrick1@example.com\",\"count\":1,\"entity\":{\"urn\":\"urn:li:corpuser:b2fd91.patrick1@example.com\"}}]},{\"field\":\"_entityType\u241etypeNames\",\"displayName\":\"Type\u241eSub Type\",\"aggregations\":[{\"value\":\"CHART\u241ePowerBI Page\",\"count\":4},{\"value\":\"CHART\",\"count\":4},{\"value\":\"DASHBOARD\u241eReport\",\"count\":1},{\"value\":\"DASHBOARD\",\"count\":1}]},{\"field\":\"removed\",\"displayName\":\"removed\",\"aggregations\":[{\"value\":\"true\",\"count\":0}]},{\"field\":\"entity\",\"displayName\":\"Type\",\"aggregations\":[{\"value\":\"CHART\",\"count\":4},{\"value\":\"DASHBOARD\",\"count\":1}]}],\"searchResults\":[{\"entity\":{\"urn\":\"urn:li:dashboard:(powerbi,b2fd91.reports.66666666-7777-8888-9999-000000000000)\",\"type\":\"DASHBOARD\",\"tool\":\"powerbi\",\"dashboardId\":\"b2fd91.reports.66666666-7777-8888-9999-000000000000\",\"properties\":{\"name\":\"datahub_order_entries\",\"description\":\"\",\"externalUrl\":\"https://app.powerbi.com/groups/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/reports/66666666-7777-8888-9999-000000000000\",\"lastModified\":{\"time\":13855410516}},\"ownership\":{\"owners\":[{\"owner\":{\"urn\":\"urn:li:corpuser:b2fd91.sam@example.com\",\"properties\":{\"active\":true,\"displayName\":\"Sarah Chen\",\"title\":\"Senior Data Analyst\",\"email\":\"sarah.chen@example.com\"}},\"type\":\"NONE\",\"ownershipType\":{\"urn\":\"urn:li:ownershipType:__system__none\",\"type\":\"CUSTOM_OWNERSHIP_TYPE\",\"info\":{\"name\":\"None\",\"description\":\"No ownership type specified.\"}}},{\"owner\":{\"urn\":\"urn:li:corpuser:b2fd91.michael@example.com\",\"properties\":{\"active\":true,\"displayName\":\"Marco Santos\",\"title\":\"Senior Software Engineer\",\"email\":\"marco.santos@example.com\"},\"editableProperties\":{\"title\":\"Product Manager\"}},\"type\":\"NONE\",\"ownershipType\":{\"urn\":\"urn:li:ownershipType:__system__none\",\"type\":\"CUSTOM_OWNERSHIP_TYPE\",\"info\":{\"name\":\"None\",\"description\":\"No ownership type specified.\"}}},{\"owner\":{\"urn\":\"urn:li:corpuser:b2fd91.patrick1@example.com\",\"properties\":{\"active\":true,\"displayName\":\"Priya Sharma\",\"title\":\"Data Steward\",\"email\":\"priya.sharma@example.com\"}},\"type\":\"NONE\",\"ownershipType\":{\"urn\":\"urn:li:ownershipType:__system__none\",\"type\":\"CUSTOM_OWNERSHIP_TYPE\",\"info\":{\"name\":\"None\",\"description\":\"No ownership type specified.\"}}},{\"owner\":{\"urn\":\"urn:li:corpuser:b2fd91.alex@example.com\",\"properties\":{\"active\":true,\"displayName\":\"Andrea Garcia\",\"title\":\"Analytics Engineer\",\"email\":\"andrea.garcia@example.com\"},\"editableProperties\":{\"title\":\"Data Engineer\"}},\"type\":\"NONE\",\"ownershipType\":{\"urn\":\"urn:li:ownershipType:__system__none\",\"type\":\"CUSTOM_OWNERSHIP_TYPE\",\"info\":{\"name\":\"None\",\"description\":\"No ownership type specified.\"}}}]},\"glossaryTerms\":{\"terms\":[{\"term\":{\"urn\":\"urn:li:glossaryTerm:b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a\",\"hierarchicalName\":\"b2fd91.1598cf93-c199-43a1-8833-fce96faa9a1a\",\"properties\":{\"name\":\"PII\",\"description\":\"# Personally Identifiable Information\\n\\nPersonally Identifiable Information (PII) refers to any data that can be used to identify a specific individual, either directly or indirectly when combined with other information. Dataset and column contents can be inferred either by the dataset or column name, description, or column sample values.\\n\\n## Direct Identifiers\\n\\nAny dataset or column that contains the following information:\\n\\n*   Full name\\n    \\n*   First name\\n    \\n*   Middle name\\n    \\n*   Last name\\n    \\n*   Social Security Number or national ID\\n    \\n*   Driver's license number\\n    \\n*   Passport number\\n    \\n*   Email address\\n    \\n*   Phone number\\n    \\n*   Physical address\\n    \\n*   Biometric data (fingerprints, facial recognition)\\n    \\n*   Account numbers\\n    \\n*   IP address (in some jurisdictions)\\n    \\n\\n## Indirect Identifiers\\n\\nAny dataset or column that contains the following information:\\n\\n*   Date of birth\\n    \\n*   Place of birth\\n    \\n*   Gender\\n    \\n*   Race/ethnicity\\n    \\n*   Job title and workplace\\n    \\n*   Education information\\n    \\n*   Geographic indicators\\n    \\n*   Medical information\\n    \\n*   Vehicle registration information\",\"termSource\":\"INTERNAL\"},\"parentNodes\":{\"count\":1,\"nodes\":[{\"urn\":\"urn:li:glossaryNode:b2fd91.9fc2293a-b772-44de-84c8-cfa9021e5825\",\"properties\":{\"name\":\"Classification\"}}]}}}]},\"editableProperties\":{\"description\":\"This dashboard gives your team a real-time view of incoming orders and processing status. You can see order volume trends, identify bottlenecks in fulfillment, and track key metrics like average order value and processing times.\\n\\nThe main view shows today's orders alongside weekly and monthly comparisons, so you can spot patterns or unusual spikes quickly. Filter by product category, sales rep, or customer type to drill down into specific segments. The processing status section highlights orders that need attention, whether they're stuck in review, waiting for inventory, or ready to ship.\\n\\nUse this dashboard during daily standup meetings to prioritize work, or check it throughout the day to stay on top of order flow. Sales managers can monitor team performance, while operations folks can identify where orders are getting delayed and take action before customers start calling.\"},\"platform\":{\"urn\":\"urn:li:dataPlatform:powerbi\",\"name\":\"powerbi\"},\"subTypes\":{\"typeNames\":[\"Report\"]},\"health\":[{\"type\":\"INCIDENTS\",\"status\":\"PASS\"}]},\"degree\":1},{\"entity\":{\"urn\":\"urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.217abe0d5c1cd421c384)\",\"type\":\"CHART\",\"tool\":\"powerbi\",\"chartId\":\"b2fd91.pages.66666666-7777-8888-9999-000000000000.217abe0d5c1cd421c384\",\"properties\":{\"name\":\"Customer Analysis\",\"description\":\"Customer Analysis\",\"lastModified\":{\"time\":13855410516}},\"platform\":{\"urn\":\"urn:li:dataPlatform:powerbi\",\"name\":\"powerbi\"},\"subTypes\":{\"typeNames\":[\"PowerBI Page\"]},\"health\":[{\"type\":\"INCIDENTS\",\"status\":\"PASS\"}]},\"degree\":1},{\"entity\":{\"urn\":\"urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.3f48c0bf859b2d14dcd0)\",\"type\":\"CHART\",\"tool\":\"powerbi\",\"chartId\":\"b2fd91.pages.66666666-7777-8888-9999-000000000000.3f48c0bf859b2d14dcd0\",\"properties\":{\"name\":\"Geographics\",\"description\":\"Geographics\",\"lastModified\":{\"time\":13855410516}},\"platform\":{\"urn\":\"urn:li:dataPlatform:powerbi\",\"name\":\"powerbi\"},\"subTypes\":{\"typeNames\":[\"PowerBI Page\"]},\"health\":[{\"type\":\"INCIDENTS\",\"status\":\"PASS\"}]},\"degree\":1},{\"entity\":{\"urn\":\"urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.83a9aaa3207edd6c721e)\",\"type\":\"CHART\",\"tool\":\"powerbi\",\"chartId\":\"b2fd91.pages.66666666-7777-8888-9999-000000000000.83a9aaa3207edd6c721e\",\"properties\":{\"name\":\"Executive Summary\",\"description\":\"Executive Summary\",\"lastModified\":{\"time\":13855410516}},\"platform\":{\"urn\":\"urn:li:dataPlatform:powerbi\",\"name\":\"powerbi\"},\"subTypes\":{\"typeNames\":[\"PowerBI Page\"]},\"health\":[{\"type\":\"INCIDENTS\",\"status\":\"PASS\"}]},\"degree\":1},{\"entity\":{\"urn\":\"urn:li:chart:(powerbi,b2fd91.pages.66666666-7777-8888-9999-000000000000.85e432543b30346a0507)\",\"type\":\"CHART\",\"tool\":\"powerbi\",\"chartId\":\"b2fd91.pages.66666666-7777-8888-9999-000000000000.85e432543b30346a0507\",\"properties\":{\"name\":\"DAX Visual\",\"description\":\"DAX Visual\",\"lastModified\":{\"time\":13855410516}},\"platform\":{\"urn\":\"urn:li:dataPlatform:powerbi\",\"name\":\"powerbi\"},\"subTypes\":{\"typeNames\":[\"PowerBI Page\"]},\"health\":[{\"type\":\"INCIDENTS\",\"status\":\"PASS\"}]},\"degree\":1}],\"offset\":0,\"returned\":5,\"hasMore\":false}}",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  },
+  "tool": "get_lineage"
+}

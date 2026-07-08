@@ -1,0 +1,36 @@
+{
+  "arguments": {
+    "urns": [
+      "urn:li:document:ecomm-metrics",
+      "urn:li:document:ecomm-order-details",
+      "urn:li:document:ecomm-runbook-promotions",
+      "urn:li:document:ecomm-runbook-order-count"
+    ]
+  },
+  "result": {
+    "content": [
+      {
+        "annotations": null,
+        "meta": null,
+        "parsed_json": [
+          {
+            "urn": "urn:li:document:ecomm-metrics"
+          },
+          {
+            "urn": "urn:li:document:ecomm-order-details"
+          },
+          {
+            "urn": "urn:li:document:ecomm-runbook-promotions"
+          },
+          {
+            "urn": "urn:li:document:ecomm-runbook-order-count"
+          }
+        ],
+        "text": "[{\"urn\":\"urn:li:document:ecomm-metrics\"},{\"urn\":\"urn:li:document:ecomm-order-details\"},{\"urn\":\"urn:li:document:ecomm-runbook-promotions\"},{\"urn\":\"urn:li:document:ecomm-runbook-order-count\"}]",
+        "type": "text"
+      }
+    ],
+    "isError": false
+  },
+  "tool": "get_entities"
+}

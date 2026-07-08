@@ -1,0 +1,166 @@
+{
+  "card": {
+    "affectedAssets": [
+      "Essential KPI Measures",
+      "datahub_order_entries",
+      "ORDER_ENTRY_DB.analytics.order_details"
+    ],
+    "cardMarkdownCharacterCount": 5585,
+    "classification": "Dashboard lineage / revenue reliability question",
+    "meaning": "Revenue definition or upstream order-detail context needs review before declaring a dashboard defect.",
+    "missingContext": [
+      "Exact timestamp of the customer/orders change",
+      "Which dashboard page or metric showed the drop",
+      "Whether the target number is GMV, net revenue, or line-item revenue",
+      "Freshness/assertion state for upstream order and customer assets"
+    ],
+    "nextOwner": {
+      "name": "Ben Porter",
+      "role": "Next owner",
+      "title": "Data Engineer"
+    },
+    "receiptPath": "/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/examples/sample_lineage_rescue_card_CR-0001.md",
+    "suggestedAction": "Check the lineage path around Essential KPI Measures and order_details, then validate filters, grain, freshness, and return handling.",
+    "urgency": "High"
+  },
+  "decision": "NEXT",
+  "evidence": {
+    "datasetQueries": 0,
+    "documentExcerpts": [
+      {
+        "excerpt": "# Key Metrics Reference  Business KPI definitions for the Order Entry e-commerce platform. Use these definitions to ensure consistent metric calculations across all dashboards, reports, and AI-generated analyses.  ## Revenue Metrics  ### GMV (Gross Merchandise Value) **Definition:** Total order value at the point of sale, before returns or cancellations. The headline revenue number.  **Calculation:** ```sql SUM(order_total) FROM orders WHERE order_status NOT IN ('Cancelled', 'On ...",
+        "title": "Key Metrics Reference"
+      },
+      {
+        "excerpt": "...nt pre-computed `line_total` | Need to debug a specific pipeline stage | | BI tools (Looker, PowerBI, Tableau) | dbt model development |  ## Key Computed Columns  | Column | Computation | Notes | |---|---|---| | `line_total` | `unit_price \u00d7 quantity` | Actual revenue per line item | | `order_size_category` | Bucket of `order_total` | Small / Medium / Large | | `stock_status` | Derived from `quantity_on_hand` | In Stock / Low / Out | | `delivery_status` | Derived from dates | On Time / Delayed / Pending | | `return_status`...",
+        "title": "Order Details View"
+      },
+      {
+        "excerpt": "# Runbook: Promotion Attribution Issues  **Applies to:** `promotions` table, `orders.promotion_id` **Severity:** Medium (affects marketing ROI reporting)  ## Symptoms  - Promotion metrics show 0 orders when orders clearly used a discount - A promotion appears to have too many or ...",
+        "title": "Runbook: Promotion Attribution Issues"
+      },
+      {
+        "excerpt": "# Runbook: Order Count Discrepancy  **Applies to:** `orders` table, all platforms **Severity:** High (affects revenue reporting)  ## Symptoms  - Dashboard shows different order counts than expected - Order counts in Snowflake differ from PostgreSQL source - A specific date range ha...",
+        "title": "Runbook: Order Count Discrepancy"
+      }
+    ],
+    "documentTitles": [
+      "Runbook: Promotion Attribution Issues",
+      "Order Details View",
+      "Key Metrics Reference",
+      "Orders Table",
+      "Core Transactional Tables"
+    ],
+    "documents": 10,
+    "downstreamReportUrn": "urn:li:dashboard:(powerbi,b2fd91.reports.66666666-7777-8888-9999-000000000000)",
+    "downstreamTotal": 5,
+    "mainAssetUrn": "urn:li:dataset:(urn:li:dataPlatform:powerbi,b2fd91.datahub_order_entries.Essential_KPI_Measures,PROD)",
+    "measures": [
+      {
+        "definition": "DIVIDE([Total Revenue], [Total Customers], 0)",
+        "name": "Revenue Per Customer"
+      },
+      {
+        "definition": "DIVIDE([Total Revenue], [Total Orders], 0)",
+        "name": "Average Order Value"
+      },
+      {
+        "definition": "CALCULATE([Total Revenue], SAMEPERIODLASTYEAR('ORDER_DETAILS'[order_date]))",
+        "name": "PY Revenue"
+      },
+      {
+        "definition": "CALCULATE([Total Revenue], DATESYTD('ORDER_DETAILS'[order_date]))",
+        "name": "YTD Revenue"
+      },
+      {
+        "definition": "SUMX('ORDER_DETAILS', 'ORDER_DETAILS'[order_total])",
+        "name": "Total Revenue"
+      },
+      {
+        "definition": "DIVIDE([YTD Revenue] - [PY Revenue], [PY Revenue], 0)",
+        "name": "YoY Growth"
+      }
+    ],
+    "schemaFields": 12,
+    "searchResults": 16,
+    "upstreamTotal": 71
+  },
+  "mcpSteps": [
+    {
+      "count": 16,
+      "detail": "Interpreted the question and found the revenue cluster.",
+      "label": "Search"
+    },
+    {
+      "count": 5,
+      "detail": "Resolved datasets, data products, and report context.",
+      "label": "Entity"
+    },
+    {
+      "count": 12,
+      "detail": "Loaded revenue measures and key fields.",
+      "label": "Schema"
+    },
+    {
+      "count": 76,
+      "detail": "Mapped upstream dependencies and downstream impact.",
+      "label": "Lineage"
+    },
+    {
+      "count": 10,
+      "detail": "Pulled metric definitions and runbook clues.",
+      "label": "Documents"
+    }
+  ],
+  "owners": [
+    {
+      "name": "Ben Porter",
+      "role": "Next owner",
+      "title": "Data Engineer"
+    },
+    {
+      "name": "Sarah Chen",
+      "role": "Dashboard owner",
+      "title": "Senior Data Analyst"
+    },
+    {
+      "name": "Marco Santos",
+      "role": "Dashboard owner",
+      "title": "Product Manager"
+    },
+    {
+      "name": "Priya Sharma",
+      "role": "Dashboard owner",
+      "title": "Data Steward"
+    },
+    {
+      "name": "Andrea Garcia",
+      "role": "Dashboard owner",
+      "title": "Data Engineer"
+    }
+  ],
+  "paths": {
+    "card": "/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/examples/sample_lineage_rescue_card_CR-0001.md",
+    "concept": "/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/demo/design/context-rescue-demo-concept-2026-07-07.png",
+    "input": "/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/examples/sample_lineage_rescue_input.md",
+    "receipt": "/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/receipts/DATAHUB_CONTEXT_RESCUE_FEASIBILITY_RECEIPT_2026-07-07.md"
+  },
+  "pitch": "Context Rescue reads the DataHub graph before it answers, turning a messy data-team question into a concrete owner, impact path, next action, and receipt.",
+  "proof": {
+    "mcpTools": [
+      "search",
+      "get_entities",
+      "list_schema_fields",
+      "get_lineage",
+      "search_documents",
+      "grep_documents",
+      "get_dataset_queries"
+    ],
+    "name": "sample_lineage_rescue_card",
+    "source": "Local DataHub quickstart with showcase-ecommerce sample graph"
+  },
+  "question": "The weekly revenue dashboard dropped after yesterday's customer/orders change.",
+  "receiptId": "CR-0001",
+  "status": "Ready",
+  "tagline": "No guesswork. Context first."
+}
