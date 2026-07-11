@@ -106,7 +106,7 @@ The result is not a chatbot answer. It is a Context Rescue Card: classification,
 
 The important part is trust. The system shows exactly what evidence it used, and it leaves a receipt so the next person inherits the work.
 
-## GitHub Publish Status
+## Final Submission Status
 
 Public repo is live:
 
@@ -118,8 +118,18 @@ Public runnable demo:
 
 - https://peanuts1605.github.io/datahub-context-rescue/
 
-Captioned demo video is recorded locally and mirrored to Drive:
+Captioned demo video is public on YouTube:
+
+- https://youtu.be/F5Y2Krc33UI
+
+The local video remains mirrored to Drive:
 
 - https://drive.google.com/file/d/1iQ2w2aIkmjaNcFSCgKA8L8w18jSlUdfG/view?usp=drivesdk
 
-Remaining publish step: upload the demo video to a public YouTube, Vimeo, or Youku link for Devpost.
+Devpost submission is live:
+
+- https://devpost.com/software/context-rescue
+
+Submitted on 2026-07-11. Devpost confirmation screenshot:
+
+- `demo/screenshots/context-rescue-devpost-submitted-top-2026-07-11.png`
