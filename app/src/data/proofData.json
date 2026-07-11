@@ -19,7 +19,7 @@
       "role": "Next owner",
       "title": "Data Engineer"
     },
-    "receiptPath": "/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/examples/sample_lineage_rescue_card_CR-0001.md",
+    "receiptPath": "/Users/alfredthebot/Naumio_HQ/hackathons/datahub-agent-2026/context-rescue/receipts/DATAHUB_CONTEXT_RESCUE_FEASIBILITY_RECEIPT_2026-07-07.md",
     "suggestedAction": "Check the lineage path around Essential KPI Measures and order_details, then validate filters, grain, freshness, and return handling.",
     "urgency": "High"
   },

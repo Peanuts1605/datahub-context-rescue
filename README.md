@@ -82,7 +82,7 @@ The MCP server was run locally with DataHub connection values stored outside the
 
 ## Submission Notes
 
-- Category: Agents That Do Real Work
+- Category: Open / Wildcard
 - Data: public-safe DataHub sample data only
 - Writeback status: local receipt created; live DataHub document writeback is parked until mutation/write tools are explicitly enabled and verified
 - License: Apache 2.0

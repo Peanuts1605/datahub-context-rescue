@@ -19,10 +19,14 @@ describe("CR-0001 proof data", () => {
     expect(proof.proof.mcpTools).not.toContain("save_document");
   });
 
+  it("labels the durable receipt rather than the sample card", () => {
+    expect(proof.card.receiptPath).toBe(proof.paths.receipt);
+    expect(proof.card.receiptPath).toMatch(/DATAHUB_CONTEXT_RESCUE_FEASIBILITY_RECEIPT_2026-07-07\.md$/);
+  });
+
   it("formats MCP counts for the replay rail", () => {
     expect(formatCountLabel({ label: "Lineage", count: 76, detail: "" })).toBe("76 links");
     expect(formatCountLabel({ label: "Schema", count: 12, detail: "" })).toBe("12 fields");
     expect(formatCountLabel({ label: "Search", count: 16, detail: "" })).toBe("16 hits");
   });
 });
-

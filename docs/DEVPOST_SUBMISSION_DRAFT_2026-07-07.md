@@ -2,7 +2,7 @@
 
 Date: 2026-07-07 local / 2026-07-08 UTC
 Hackathon: Build with DataHub: The Agent Hackathon
-Category: Agents That Do Real Work
+Category: Open / Wildcard
 
 ## Project Name
 
@@ -31,7 +31,7 @@ This is not a generic catalog chatbot or text-to-SQL clone. It is a decision art
 - Starts from one messy data-team question.
 - Replays the DataHub MCP evidence chain: Search, Entity, Schema, Lineage, Documents.
 - Shows grounded proof counts from CR-0001.
-- Produces a Context Rescue Card with classification, urgency, meaning, affected assets, missing context, owner, suggested action, decision, and receipt.
+- Replays the verified CR-0001 output as a Context Rescue Card with classification, urgency, meaning, affected assets, missing context, owner, suggested action, decision, and receipt.
 - Includes sample outputs in `examples/` and proof receipts in `receipts/`.
 
 ## How We Built It

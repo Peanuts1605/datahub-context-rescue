@@ -188,7 +188,7 @@ def main() -> None:
             ],
             "nextOwner": owners[0] if owners else {"name": "Ben Porter", "title": "Data Engineer", "role": "Next owner"},
             "suggestedAction": "Check the lineage path around Essential KPI Measures and order_details, then validate filters, grain, freshness, and return handling.",
-            "receiptPath": str(EXAMPLES / "sample_lineage_rescue_card_CR-0001.md"),
+            "receiptPath": str(PROJECT_ROOT / "receipts" / "DATAHUB_CONTEXT_RESCUE_FEASIBILITY_RECEIPT_2026-07-07.md"),
             "cardMarkdownCharacterCount": len(card),
         },
         "evidence": {
