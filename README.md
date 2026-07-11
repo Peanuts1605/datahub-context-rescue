@@ -42,7 +42,7 @@ npm run dev
 
 Then open the local URL printed by Vite.
 
-The public demo is automatically tested and deployed from `main` through GitHub Pages.
+The public demo is built from this source and published through the repository's `gh-pages` branch.
 
 Demo evidence:
 
