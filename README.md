@@ -1,6 +1,8 @@
 # Context Rescue
 
-Context Rescue is a tiny DataHub-native agent demo.
+Context Rescue is a DataHub-native agent demo that turns a messy dashboard incident into a lineage-aware next decision.
+
+**Live demo:** https://peanuts1605.github.io/datahub-context-rescue/
 
 Given a messy data-team question, it uses DataHub MCP evidence to find relevant assets, inspect schema and metric definitions, trace upstream and downstream lineage, identify owners and missing context, then emit a Context Rescue Card with a NEXT/HOLD decision and durable receipt.
 
@@ -28,17 +30,19 @@ Sample output:
 - `examples/sample_lineage_rescue_card_CR-0001.md`
 - `receipts/DATAHUB_CONTEXT_RESCUE_FEASIBILITY_RECEIPT_2026-07-07.md`
 
-## Local Demo
+## Try It
 
 The wrapper runs in replay mode from verified CR-0001 evidence files. It does not require DataHub to be running just to view the demo.
 
 ```bash
 cd app
-npm install
+npm ci
 npm run dev
 ```
 
 Then open the local URL printed by Vite.
+
+The public demo is automatically tested and deployed from `main` through GitHub Pages.
 
 Demo evidence:
 
@@ -82,3 +86,5 @@ The MCP server was run locally with DataHub connection values stored outside the
 - Data: public-safe DataHub sample data only
 - Writeback status: local receipt created; live DataHub document writeback is parked until mutation/write tools are explicitly enabled and verified
 - License: Apache 2.0
+- Public repository: https://github.com/Peanuts1605/datahub-context-rescue
+- Public demo: https://peanuts1605.github.io/datahub-context-rescue/

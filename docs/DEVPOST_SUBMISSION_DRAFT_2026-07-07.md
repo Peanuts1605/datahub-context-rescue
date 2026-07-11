@@ -75,9 +75,15 @@ DataHub context retrieved:
 
 ## Testing Instructions
 
+Public demo:
+
+https://peanuts1605.github.io/datahub-context-rescue/
+
+Or run it locally:
+
 ```bash
 cd app
-npm install
+npm ci
 npm run lint
 npm test
 npm run build
@@ -100,12 +106,6 @@ The result is not a chatbot answer. It is a Context Rescue Card: classification,
 
 The important part is trust. The system shows exactly what evidence it used, and it leaves a receipt so the next person inherits the work.
 
-## What Is Next
-
-- Push the repo publicly with Apache 2.0 license visible.
-- Upload the 71.16 second captioned demo video to a public YouTube, Vimeo, or Youku link.
-- Optionally add verified DataHub document writeback later once MCP mutation tools are enabled and tested.
-
 ## GitHub Publish Status
 
 Public repo is live:
@@ -113,6 +113,10 @@ Public repo is live:
 - https://github.com/Peanuts1605/datahub-context-rescue
 
 GitHub detects the repository license as Apache License 2.0.
+
+Public runnable demo:
+
+- https://peanuts1605.github.io/datahub-context-rescue/
 
 Captioned demo video is recorded locally and mirrored to Drive:
 
